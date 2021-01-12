@@ -60,6 +60,8 @@ urlpatterns = [
     path('titlehtm2txt/', views.titlehtm2txt,name='titlehtm2txt'),
     path('metatest/', views.metatest,name='metatest'),
     path('publicationstest/', views.publicationstest, name='publicationstest/'),
+    path('setAdminOn/', views.setAdminOn,name='setAdminOn'),
+    path('setAdminOff/', views.setAdminOff,name='setAdminOff'),
   
     
     #TODO: devier oject sur projet pur garder lesliens existants

@@ -949,14 +949,24 @@ def exhibitions(request,categorie='exhibitions',mode=None):
     args['tup']=tup 
     args['cook']=cook 
     
-    return render(request,'exhibitions.html',args)          
+    return render(request,'exhibitions.html',args)    
+
+def setAdminOn(request):
+    response = HttpResponseRedirect('/')
+    response.set_cookie('modif', 'ok', max_age=14400)
+    return response
+    #return render(request,'index.html')
+
+def setAdminOff(request):  
+    response = HttpResponseRedirect('/')
+    response.set_cookie('modif', 'no', max_age=86400)
+    return response
+    #return render(request,'index.html')    
 
 def vcaadmin(request,var):
     if var == "Roquette,2":
-            response = HttpResponse('Modifications autorisées pendant 4h00 renouvelables<br>vcaadmin/no pour stopper manuellement l édition <br> <a href="https://vincent.callebaut.org">Cliquer ici pour activer  Edition sur tout le site</a>')
-            response.set_cookie('modif', 'ok', max_age=14400)
-            return response
-            #return render(request,'index.html')
+        return render(request,'vcaadmin.html') 
+           
     else:
         response = HttpResponse('Modifications ne sont plus autorisées <br> <a href="https://vincent.callebaut.org">Cliquer ici pour désactiver  Edition sur tout le site</a>')
         response.set_cookie('modif', 'no', max_age=86400)
@@ -1590,16 +1600,22 @@ def titlehtm2txt(request):
     return HttpResponse(str(cpt)+' '+texte) 
 
 def _metadesc(request,categorie,projet):
-    lien = static + categorie+'/'+projet+'/txt/us/descnew.txt'
-    with io.open(lien, 'r',encoding='utf8') as f:
-        myfile = f.readline().strip()
-    return myfile
+    try:
+        lien = static + categorie+'/'+projet+'/txt/us/descnew.txt'
+        with io.open(lien, 'r',encoding='utf8') as f:
+            myfile = f.readline().strip()
+        return myfile
+    except:
+        return ''
 
 def _metatitle(request,categorie,projet):
-    lien = static + categorie+'/'+projet+'/txt/us/titlenew.txt'
-    with io.open(lien, 'r',encoding='utf8') as f:
-        myfile = f.readline().strip() + " - Vincent Callebaut Architectures"
-    return myfile
+    try:
+        lien = static + categorie+'/'+projet+'/txt/us/titlenew.txt'
+        with io.open(lien, 'r',encoding='utf8') as f:
+            myfile = f.readline().strip() + " - Vincent Callebaut Architectures"
+        return myfile
+    except:
+        return ''
 
 def metatest(request):
     #myfile = _metadesc(request,'publications','201130_adn')
