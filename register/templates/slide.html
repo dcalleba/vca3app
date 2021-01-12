@@ -1,0 +1,18 @@
+<!-- <link rel="stylesheet" type="text/css" href="http://static.callebaut.org/static/vca/mix7.css"> -->
+
+{% load static %}
+<div class="slide__cadre">
+        <div id="slider" class="slide">
+                <ul class="slides">
+                        <!-- <img class="img lazyload blur-up slide__dim" data-src="{% static 'projects/200207_rainbowtree/hr/new_pl000.jpg' %}" alt="project"> -->
+                        {% for imgt,imgh,img_alt in liste_thumb %}
+                        <li>
+                                <picture>          
+                                        <source media="(max-width: 852px)" srcset="{% static imgt %}" loading="lazy">
+                                                <img class="img lazyload blur-up slide__dim" data-src="{% static imgh %}" alt= "VCA {{img_alt}}" title="{{img_alt}}" loading="lazy">
+                                </picture>
+                        </li>
+                        {% endfor %}
+                </ul>
+        </div>
+</div>

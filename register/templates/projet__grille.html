@@ -1,0 +1,22 @@
+{% load static %}
+<br>
+<div class="grid__container ">
+  <div class="grid__magic largeur">
+    {% for thumb,img_alt in data_slide %}
+    <div class="grid__carte fadeIn20">
+      <picture>
+        <a href="/zoom/{{categorie}}/{{date_projet}}/{{thumb}}" class="">
+         <!-- <p>D{{vigdef}}F</p> -->
+          {% if vigdef == 'min' %}
+          <img class="grid__img grid__img--hover lazyload blur-up grid_img__box" src="/static/{{categorie}}/{{date_projet}}/thumb/{{thumb}}.jpg" alt="{{img_alt}} {{thumb}}" title="Template : {{thumb}}" loading="lazy" />
+          {% endif %}
+          {% if vigdef != 'min' %}
+          <img class="grid__img grid__img--hover lazyload blur-up grid_img__box" src="/static/{{categorie}}/{{date_projet}}/hr/{{thumb}}.jpg" alt="{{img_alt}} {{thumb}}" title="Template : {{thumb}}" loading="lazy" />
+          {% endif %}
+        </a>
+      </picture>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<br>

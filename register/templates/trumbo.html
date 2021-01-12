@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'trumbowyg.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mix.css' %}" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container"></div>
+    <p>Le fichier actuel est : {{lien}}</p>
+    <p>D{{recook}}F</p>
+    <a id="saveToFile" class="myButton">Télécharger la correction</a>
+    <textarea id="values" class="form-control">
+        {{data|safe}}
+    </textarea>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="jquery.min.js"><\/script>')
+    </script>
+    <!-- Import Trumbowyg -->
+    <script src="{% static 'js/trumbowyg.js' %}"></script>
+    <script>
+        $.trumbowyg.svgPath = "{% static '/icons/icons.svg' %}";
+        $('#values').trumbowyg();
+    </script>
+    <script>
+        $(function () {
+            $('#saveToFile').click(function (e) {
+                var data = document.getElementById('values').value;
+                var data = 'data:application/html;charset=utf-8,' + encodeURIComponent(data);
+                var el = e.currentTarget;
+                el.href = data;
+                el.target = '_blank';
+                el.download = '{{lien_min}}';
+                var windowObjectReference;
+                var strWindowFeatures =
+                    "menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes";
+                windowObjectReference = window.open("https://vincent.callebaut.org/upload/vca",
+                    "CNN_WindowName", strWindowFeatures);
+            });
+        });
+    </script>
+</body>
+
+</html>

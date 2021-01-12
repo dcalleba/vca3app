@@ -1,0 +1,24 @@
+{% extends "bas.html" %}
+{% load static %}
+{% block titre %}
+{{title}}
+{% endblock %}
+{% block slide %}
+
+{% include "cv__slide.html" %}
+{% endblock %}
+{% block grid %}
+{% endblock %}
+{% block projet_description %}
+<div class="projet_fiche__container largeur">
+    <br />
+    {% if cook == "ok" %}
+    <p> <a class="myButton" href="/trumbo/cv">Editeur</a></p>
+    {% endif %}
+    <div class="projet_fiche">
+        {% include  "cv/txt/us/desc_us.html" %}
+    </div>
+</div>
+{% endblock %}
+{% block article %}
+{% endblock %}

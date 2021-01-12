@@ -1,0 +1,18 @@
+{% extends "bas.html" %}
+{%load static%}                                                                                                                                                                                                                                                                                                                                                                                                                              
+{% block titre %}
+<title>{{meta_titre}}</title>
+
+{{reponse}}
+{% endblock %}
+{% block slide %}
+<meta name="description" content="{{reponse}}" />
+{% include "cv__slide.html" %}
+{% endblock %}
+{% block grid %}
+{% endblock %}
+{% block projet_description %}
+{{meta_titre}}
+{% endblock %}
+{% block article %}
+{% endblock %}

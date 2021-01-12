@@ -1,0 +1,13 @@
+{% extends "bas.html" %} 
+{% block titre %}
+{{title}}
+{% endblock %}
+{% block slide %}
+<div class="video">
+    <iframe class="video__dim" src="https://www.youtube.com/embed/{{lien}}?&amp;autoplay=1" allowfullscreen title={{meta_titre}}></iframe>
+</div>
+{% endblock %}
+{% block grid %}
+{% endblock %}
+{% block article %}
+{% endblock %}

@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'trumbowyg.css' %}" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container"></div>
+    <p>hello</p>
+    <a id="Save" href="../filesave/daniel/callebaut">filesave</a>
+    <div id="btnExport"></div>
+
+    <textarea id="values" class="form-control">
+        {{data|safe}}
+        </textarea>
+
+
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        //window.jQuery || document.write('<script src="jquery.min.js"><\/script>')
+    </script>
+
+    <!-- Import Trumbowyg -->
+    <script src="{% static 'js/trumbowyg.js' %}"></script>
+
+    <script>
+        $.trumbowyg.svgPath = "{% static '/icons/icons.svg' %}";
+        $('#values').trumbowyg();
+    </script>
+
+    <script>
+        $(function () {
+            $('#saveToFile').click(function (e) {
+                var data = document.getElementById('values').value;
+                var data = 'data:application/html;charset=utf-8,' + encodeURIComponent(data);
+                var el = e.currentTarget;
+                el.href = data;
+                el.target = '_blank';
+                el.download = 'desc_us.html';
+            });
+        });
+    </script>
+    <script>
+        var obj = document.getElementById('values').value;
+        console.log(obj);
+        var data = "html;charset=utf-8," + encodeURIComponent(ob);
+        var a = document.createElement('a');
+        a.href = 'data:' + data;
+        a.download = 'test/us_desc.html';
+        a.innerHTML = 'download le fichier';
+        var container = document.getElementById('container');
+        container.appendChild(a);
+    </script>
+
+    <script>
+        function exportToCSV() {
+            var csv = “Abc,
+                DEF, GHI, JKLM”
+            // Data URI
+            csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+            $(this)
+                .attr({
+                    'href': csvData,
+                    'target': '_blank'
+                });
+        }
+        // This must be a hyperlink
+        $("#btnExport ").on('click', function (event) {
+            exportToCSV.apply();
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $('#Save').click(function (e) {
+                var data = document.getElementById('values').value;
+                //var data = 'data:application/html;charset=utf-8,' + encodeURIComponent(data);
+                sessionStorage.setItem("couleur", JSON.stringify(data));
+            });
+        });
+    </script>
+
+    <script>
+        a = sessionStorage.getItem("couleur");
+        console.log(a);
+    </script>
+
+</body>
+
+</html>

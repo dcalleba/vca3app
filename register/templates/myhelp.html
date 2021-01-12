@@ -1,0 +1,54 @@
+{% extends "bas.html" %} {% load static %}
+
+{% block titre %}
+{{title}}
+{% endblock %}
+{% block css %}
+
+
+<style>
+    .image_container {
+        display: flex;
+        justify-content: center;
+        z-index: -2;
+
+    }
+
+    .img_dim {
+
+        --main-width-image: calc((100vh - 60px) * 1.415 - 0px);
+        display: block;
+        max-width: 98vw;
+        width: var(--main-width-image);
+        background-color: grey;
+    }
+</style>
+{% endblock %}
+{% block slide %}
+{% endblock %}
+{% block grid %}
+{% endblock %}
+{% block projet_description %}
+<div class="projet_fiche__container largeur">
+    <br />
+    {% if cook == "ok" %}
+    <p> <a class="myButton" href="/trumbo/aide">Editeur</a></p>
+    {% endif %}
+    <div class="projet_fiche">
+        {% include "aide/txt/us/desc_us.html" %}
+    </div>
+</div>
+
+<div class="projet_fiche__container largeur">
+    <br />
+    <h1 style="text-align: center;">HELP</h1>
+
+    <h3><a href="https://vincent.callebaut.fr/static/aide/majvca.pdf">Ancienne aide création nouveaux dossiers</a></h3>
+    <!-- <div id="upload"><a href="/upload/{{categorie}}/16_____new/new/new">Créer un Nouveau Dossier</a></div> -->
+    <!-- <div id="upload"><a href="/creation">Créer un Nouveau Dossier</a></div> -->
+</div>
+{% endblock %}
+{% block article %}
+{% endblock %}
+{% block foot %}
+{% endblock %}

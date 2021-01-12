@@ -1,0 +1,245 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+
+<head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-4971504-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-4971504-1');
+    </script>
+
+    
+{% block meta %}
+<title>{{meta_titre}}</title>
+<meta name="title" content="{{meta_titre}}" />
+<meta name="description" content="{{meta_desc}}" />
+
+<meta property="og:url" content="{{og_url}}"  />
+<meta property="og:description" content="{{meta_desc}}" />
+<meta property="og:image" content="{{og_image}}" />
+<meta property="og:site_name" content="VINCENT CALLEBAUT ARCHITECTURES" />
+<meta property="og:title" content="{{meta_titre}}" />
+<meta property="og:type" content="website" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{meta_titre}}" />
+<meta name="twitter:description" content="{{meta_desc}}" />
+{% endblock %}  
+
+
+
+    <!-- -------------------------------------------------------- import meta commun   ---------------- -->
+    {% include "meta_commun.html" %}
+    
+   
+    {% block og %}
+    {% endblock %}
+    
+
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "Organization",
+            "name": "Vincent Callebaut",
+            "url": "https://vincent.callebaut.org",
+            "address": "2, rue de la Roquette  75011 Paris France",
+            "sameAs": [
+                "https://www.facebook.com/Vincent.Callebaut.Architectures/",
+                "https://www.linkedin.com/in/vincent-callebaut-60a0b4139/"
+            ]
+        }
+    </script>
+
+
+    <meta name="google-site-verification" content="bUmRgwDIWvAsaztlKM_EbiYs6M3huQCf5BZGkH15o2g" />
+
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <!-- ***************************    Chargement js  ************************************ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.3/jquery.flexslider-min.js"></script>
+    <!-- ***************************    Chargement css  ************************************ -->
+
+
+    <!-- Mobile Configurations
+        ======================================================================== -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- fav and icons for Mobile
+            ======================================================================== -->
+    <link rel="shortcut icon" href="{% static 'icons/logo_vca_icon.png' %}" />
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'icons/apple-touch-icon-57x57.png' %}" />
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'icons/apple-touch-icon-60x60.png' %}" />
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'icons/apple-touch-icon-72x72.png' %}" />
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'icons/apple-touch-icon-76x76.png' %}" />
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'icons/apple-touch-icon-114x114.png' %}" />
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'icons/apple-touch-icon-120x120.png' %}" />
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'icons/apple-touch-icon-144x144.png' %}" />
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'icons/apple-touch-icon-152x152.png' %}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'icons/apple-touch-icon-180x180.png' %}" />
+
+
+    <link rel="stylesheet" type="text/css" href="{% static '/css/mix.css' %}">
+    <style>
+        html {
+            background-color: #f2f7f3;
+        }
+
+        .largeur {
+            --main-width: calc((100vh - 60px) * 1.415 - 0px);
+            max-width: 98vw;
+            width: var(--main-width);
+        }
+
+        .texte-largeur {
+            --main-width: calc((100vh - 60px) * 1.415 - 0px);
+            display: block;
+            max-width: 98vw;
+            width: var(--main-width);
+            display: flex;
+            justify-content: center;
+            margin: 0 auto 0 auto;
+            z-index: 100;
+            /* a cause de la barre sociaux */
+        }
+
+        .haut-calc-large {
+            --main-width: calc((100vh - 60px) * 1.415);
+            display: block;
+            max-width: 100vw;
+            width: var(--main-width);
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            right: 0;
+            left: 0;
+            margin: 0 auto 0 auto;
+            z-index: 2;
+        }
+
+        /* a cause de la barre sociaux */
+
+        .myButton {
+            display: inline-block;
+        }
+    </style>
+    {% block css %}
+
+    {% endblock %}
+</head>
+
+<body><input type='hidden' name='csrfmiddlewaretoken'
+        value='4AxKRZ9bpM9uLktVfNfS2PYP8DntrVwNI4iJcKQbGsjAN9Ajc3D5kWhEPrEbfL7N' />
+
+
+    <div class="haut-calc-large">
+        <nav class="navbar">
+            <img class="navbar__logo lazyload blur-up" alt="project"
+                src="{% static 'images/vincent_logomd1.png' alt='Company Logo' %}">
+
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+            <ul class="nav navbar__ul">
+                {% if cook == "ok" %} <li class="navbar__item"><a href="/myadmin">Admin</a></li>{%endif%}
+                <li class="navbar__item"><a href="/">Home</a></li>
+                <li class="navbar__item"><a href="/cv/">Profile</a></li>
+                <li class="navbar__item"><a href="/category/projects/">Projects</a></li>
+                <li class="navbar__item"><a href="/category/exhibitions/">Exhibitions</a></li>
+                <li class="navbar__item"><a href="/category/videos/">Vidéos</a></li>
+                <li class="navbar__item"><a href="/category/publications/">Publications</a></li>
+                <li class="navbar__item"><a href="/contact/">Contact</a></li>
+            </ul>
+
+        </nav>
+    </div>
+    <div class="navbar__fluide">
+        <span></span>
+    </div>
+   
+    <!-- <div class="slide__first">hello le monde</div> -->
+    {% block slide %}
+    {% include "slide.html"%}
+    {% endblock %}
+    {% block grand_titre %}
+    {% endblock %}
+    {% block fiche %}
+    {% endblock %}
+    {% block grid %}
+    {% endblock %}
+    {% block projet_description %}
+    {% endblock %}
+    {% block foot %}
+
+    {% include "footer.html"%}
+    {% endblock %}
+    {% block article %}
+    {% include "article.html"%}
+    {% endblock %}
+
+
+
+
+
+    <script>
+        $('.menu-toggle').click(function () {
+            $(".nav").toggleClass("mobile-nav");
+            $(this).toggleClass("is-active");
+        });
+    </script>
+    <script>
+        $(window).load(function () {
+            $('#slider').flexslider({
+                slideshow: true,
+                animation: "fade",
+                controlNav: false,
+                animationLoop: true,
+                directionNav: false,
+                video: false,
+                slideshowSpeed: 3000, //Integer: Set the speed of the slideshow cycling, in milliseconds
+                animationSpeed: 600,
+                /* reload video on navigation */
+                before: function () {
+                    $('video').each(function () {
+                        $(this).get(0).load();
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script type='text/javascript'
+        src='https://platform-api.sharethis.com/js/sharethis.js#property=5e834708c43e3f0019117e5c&product=inline-share-buttons'
+        async='async'></script>
+
+
+    <script src="{% static 'js/lazysizes.min.js' %}"></script>
+    {% block js %}
+    
+    
+    {% endblock %}
+    <script language="JavaScript" type="text/javascript">
+       
+        var bodyLoad = parent.document.getElementsByTagName("body2")[0]; 
+        bodyLoad.setAttribute("oncontextmenu","return false;");
+        bodyLoad.setAttribute( "ondragstart","return false;");
+        bodyLoad.setAttribute("onselectstart","return false;");
+        
+        </script>
+
+</body>
+
+</html>

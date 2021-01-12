@@ -1,0 +1,88 @@
+{% extends "bas.html" %}
+
+{% load i18n static %}
+
+
+{% block css %}
+
+
+
+{% endblock %}
+
+
+{% block article %}
+
+{% endblock %}
+{% block projet_description %}
+<div class="projet_fiche__container largeur">
+     <br><br><br><br>
+
+     <h3>Mise à jour du site concerne que les catégories projects, exhibitions, publications et vidéos</h2>
+     
+     <h3><a href="http://vincent.callebaut.fr/static/aide/majvca.pdf">Ancien Manuel d'Utilisation</a></h3><br>
+     
+     
+     <hr />
+       
+     
+     <!--<a href="ftp://callebaut_vca@ftp-callebaut.alwaysdata.net">Liste des dossiers</a> Actuellement ne fonctionne que sous google chrome-->
+                                                     
+     
+     <div style="padding:40px;margin:40px;border:1px solid #ccc">
+      Catégorie:{{cat}} - Date_projet:{{date_projet}} - Projet:{{proj}} - Sourcetxt:{{sourcetxt}}
+         <h3>Sélectionner les images à placer sur le site (en cas d'ajout il faut sélectionner toutes les images, les existantes comprises)</h3>
+         <div class="label">Toutes les images existantes seront effacées dans le dossier avant le transfert des nouvelles mais les textes ne seront pas effacés</div>
+         <form action="" method="post" enctype="multipart/form-data">
+                 {% csrf_token %}          
+                  <div class="label">Images</div><input type="file" multiple="multiple" name="myfiles" value="{{sourcetxt}}"><br>{{sourcetxt}}<br>
+                  <div class="label">Catégorie </div><select name="cat"> 
+                  
+               
+         {%if cat == "projects"%}
+              <option selected="selected" value="projects">projects</option>
+         {%else%}
+              <option value="projects">projects</option>
+         {%endif%}   
+         
+          {%if cat == "exhibitions"%}
+              <option selected="selected" value="exhibitions">exhibitions</option>
+         {%else%}
+              <option value="exhibitions">exhibitions</option>
+         {%endif%}   
+         
+         
+         {%if cat == "videos"%}
+              <option selected="selected" value="videos">videos</option>
+         {%else%}
+              <option value="videos">videos</option>
+         {%endif%}   
+         
+         
+         {%if cat == "publications"%}
+              <option selected="selected" value="publications">publications</option>
+         {%else%}
+              <option value="publications">publications</option>
+         {%endif%}   
+         
+        
+       </select><br><br>
+                 
+                 <div class="label">Date du dossier (aammjj) même date si modification</div> <input type = "text" name='date_projet' value = {{date_projet}} > <br>
+                 <div class="label">dossier même dossier si modification </div> <input type = "text" name='dossier' value = {{proj}} > <br>
+                 <!--<div class="label">Efface toutes images existantes</div> <input type = "text" name='efface' value= 'n' label="efface"><br><br>-->
+                 
+                 <hr />            
+                 <div class="label">Lien Vidéo YouTube</div> <input type = "text" name='lien' value= '' > !!! Seulement le lien sans le http://..... devant er respecter la case !!!<br>
+                 <div class="label">Titre de la Vidéo</div> <input type = "text" name='titre_video' value= '' > <br>
+                 <hr />
+                 <br><br>
+                  <div class="label"></div><button type="submit">{% trans "Transfert" %}</button><br>
+                  <div class="label">Attendre +/- 1 minute à la fin du travail l'écran doit s'ouvrir sur le projet traité !</div>
+                  
+         </form>
+     </div>
+</div>
+{% endblock %}
+
+{% block foot %}
+{% endblock %}

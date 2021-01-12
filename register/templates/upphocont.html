@@ -1,0 +1,27 @@
+{% extends "bas.html" %}
+{% load static %}
+{% block css %}
+{% endblock %}
+{% block slide %}
+{% endblock slide %}
+{% block retour %}
+{% endblock retour %}
+{% block article %}
+<div style="text-align: center;">
+    <br>
+    <br><br> <br>
+    <br><br>
+    <h3>Sélectionner la photo à placer sur l'onglet Contact du site</h3>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="label">Photo</div><input type="file" multiple="multiple" name="myfiles"><br><br>
+        <br>
+        <br><br>
+        <div class="label"></div><button type="submit">Send Photo</button><br>
+        <hr />
+    </form>
+</div>
+<!-- TODO:hello Daniel, -->
+{% endblock %}
+{% block foot %}
+{% endblock %}

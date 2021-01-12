@@ -1,0 +1,31 @@
+{% extends "bas.html" %} 
+
+{% block titre %}
+{{title}}
+{% endblock %}
+
+{% block slide %}
+
+{% endblock %}
+
+
+
+{% block grid %}
+
+{% endblock %}
+
+
+
+{% block projet_description %}
+
+{% endblock %}
+
+{% block article %}
+<div id="myvar"  style="color: black"
+   {{ myVar }}</div>
+<script>
+    a = sessionStorage.getItem("datas");
+    console.log(a);
+    document.getElementById('myvar').innerHTML = a;
+</script>
+{% endblock %}

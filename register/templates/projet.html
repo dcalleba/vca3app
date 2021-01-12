@@ -1,0 +1,56 @@
+{% extends "bas.html" %}
+{% block titre %}
+{{title}}
+{% endblock %}
+{% block grand_titre %}
+{% endblock %}
+{% block fiche %}
+
+<div class="projet_fiche__container largeur">
+    <div class="projet_titre">
+        <div>
+            {% include  titre_lien %}
+            <br />
+            <hr />
+        </div>
+    </div>
+
+    <div class="projet_fiche">
+        <br />
+        {% if cook == "ok" %}
+        <a class="myButton" href="/trumbo/{{categorie}}_{{date_projet}}_txt_us_fiche_us">Edition</a>
+        {% endif %}
+        {% include  fiche_lien %}
+<br />
+        <hr>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block slide %}
+{% include "projet__slide.html"%}
+{% endblock %}
+
+{% block grid %}
+{% include "projet__grille.html"%}
+{% endblock %}
+
+{% block projet_description %}
+<div class="projet_fiche__container largeur">
+    {% if cook == "ok" %}
+    <a class="myButton" href="/trumbo/{{categorie}}_{{date_projet}}_txt_us_desc_us">Edition</a>
+    {% endif %}
+    <br />
+    <div class="projet_fiche">
+        {% include  desc_lien %}
+        <br>
+        <hr>
+    </div>
+</div>
+{% endblock %}
+{% block article %}
+{% endblock %}
+{% block og %}
+{% endblock %}

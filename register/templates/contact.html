@@ -1,0 +1,42 @@
+{% extends "bas.html" %} {% load static %}
+
+<!--  -->
+{% block css %}
+<style>
+    .image_container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-items: center;
+        justify-content: center;
+        justify-self: center;
+        text-align: center;
+        z-index: -2;
+    }
+
+    .img_dim {
+        --main-width-image: calc((100vh - 60px) * 1.415 - 0px);
+        display: block;
+        max-width: 98vw;
+        width: var(--main-width-image);
+        background-color: white;
+    }
+</style>
+{% endblock %}
+{% block slide %}
+
+<div class="image_container">
+    <div admin class="img_dim">
+        {% if cook == "ok" %}
+        <p> <a class="myButton" href="/upphocont">Upload new photo for Contact</a></p>
+        {% endif %}
+    </div>
+    <div pho>
+        <img class="img_dim lazyload blur" src="{% static  'contact/hr/contimg.jpg' %}" alt="photo_contact" />
+    </div>
+</div>
+{% endblock %}
+{% block grid %}
+{% endblock %}
+{% block article %}
+{% endblock %}

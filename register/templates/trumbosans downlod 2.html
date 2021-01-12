@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'trumbowyg.css' %}" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container"></div>
+    <p>{{lien}}</p>
+    <textarea id="values" class="form-control">
+        {{data|safe}}
+        </textarea>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="jquery.min.js"><\/script>')
+    </script>
+
+    <!-- Import Trumbowyg -->
+    <script src="{% static 'js/trumbowyg.js' %}"></script>
+
+    <script>
+        $.trumbowyg.svgPath = "{% static '/icons/icons.svg' %}";
+        $('#values').trumbowyg();
+    </script>
+
+
+<script>
+
+</script>
+
+
+<script>
+    var obj = document.getElementById('values').value;
+    console.log(obj);
+    var data = "html;charset=utf-8," + encodeURIComponent(obj);
+    var a = document.createElement('a');
+    a.href = 'data:' + data;
+    console.log("lien min : "+'{{lien_min}}');
+    a.download = '{{lien_min}}';
+    a.innerHTML = 'download le bon fichier';
+    var container = document.getElementById('container');
+    container.appendChild(a);
+</script>
+    
+
+    <script>
+        //a = sessionStorage.getItem("datas");
+        //console.log(a);
+    </script>
+
+</body>
+
+</html>

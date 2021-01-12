@@ -1,0 +1,24 @@
+{% extends "bas.html" %}
+{% load static %}
+{% block css %}
+{% endblock %}
+{% block slide %}
+{% endblock slide %}
+{% block retour %}
+{% endblock retour %}
+{% block article %}
+<div style="text-align: center;">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <br><br><br><br><br><br><br>
+    <p>{{recook}}</p>
+    <label class="label">Fichier a Uploader</label><br><br><br>
+    <input class="input is-success" type="file" name="myfile" value=""><br><br><br>
+    <h2>Ne pas oublier de choisir ci-dessus le fichier à ulploader</h2>
+    <button class="myButton" type="submit">Upload le doc </button>
+  </form>
+</div>
+<!-- TODO:hello Daniel, -->
+{% endblock %}
+{% block foot %}
+{% endblock %}

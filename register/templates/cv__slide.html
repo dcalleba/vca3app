@@ -1,0 +1,21 @@
+{% load static %}
+<!-- *****************************************  zoom slide **************************************** -->
+{% if cook == "ok" %}
+<p> <a class="myButton" href="/upphocv">Upload new photo for CV</a></p>
+{% endif %}
+<div class="slide__cadre">
+       
+        <div id="slider" class="slide">
+              
+                <ul class="slides">
+                       
+                        <li>
+                                <picture>
+                                        <img class="img lazyload blur-up slide__dim"
+                                                data-src="{% static 'cv/hr/cvimg.jpg'%}" alt="photo_cv">
+                                </picture>
+                        </li>
+                </ul>
+        </div>
+</div>
+<!-- *************************************************************************************************** -->

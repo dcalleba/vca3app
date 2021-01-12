@@ -1,0 +1,163 @@
+{% extends "base.html" %} {% load static %} {% block metalink %}
+
+{%title_block%}{{dossier}}{% endblock %}
+<link href="{% static 'vca/thumbnail_text_carousel.css'%}" rel="stylesheet" media="all">
+
+
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js">
+	< link href = "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css"
+	rel = "stylesheet" >
+		< script src = "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js" >
+</script>
+{% endblock %} {% block css %} .col-lg-4 ,.col-md-4,col-sm-4,col-xs-4{ padding-left:0px; padding-right:0px; } .magrille { /* enleve les marge et pad sinon proble alignement vertical*/ position: relative; overflow: hidden; } .magrille img { max-width:100% !important; clear:both; -webkit-transition: all 0.8s ease; transition: all 0.8s ease; } .magrille:hover img { -webkit-transform:scale(2); transform:scale(4); } .magrille:hover .hotspot-text { bottom: 0; left:0; right:0; } .player{ position: relative; margin-top:-25px; margin-right:auto; margin-left:auto; text-align:center; } #homeCarousel{ margin-top:4vw; } .grand-titre{ text-align:left; margin-top:20px; margin-bottom:10px; padding-top:10px; padding-bottom:10px; margin-right:auto; margin-left:auto; line-height:20px; color: #000; background-color:#E0F7E2; /* text-shadow: 1px 1px 2px black, 0 0 25px green, 0 0 5px darkgreen; */ z-index:1000; } .fiche{ margin-top:10px; margin-bottom:10px; padding-top:10px; padding-bottom:10px; color:#000; background-color:#FFF; } {%endblock%} {% block java_head %} {%endblock%} {% block contenu %}
+
+<div id="fondu">
+	<div class="contenu">
+
+		{% block titre %} {% endblock %}
+
+		<section class="row">
+			<div class="col-xs-12">
+
+
+
+				<!--<div id="homeCarousel" class="carousel thumbnail_text_carousel_fade thumbnail_text_carousel_wrapper" data-ride="carousel" data-interval="3000" data-pause="hover">-->
+
+				<!--<div id="homeCarousel" class="carousel thumbnail_text_carousel_fade" data-ride="carousel" data-interval="6000">-->
+				<div id="homeCarousel" class="carousel thumbnail_text_carousel_fade" data-ride="carousel" data-interval="3000" data-pause="hover">
+
+					<!-- Carousel indicators les petits ronds qui montrent la progression-->
+					<ol class="carousel-indicators">
+						{% for data_sl in item_list %}
+						<li data-target="#homeCarousel" data-slide-to="{{forloop.counter0}}"></li>
+						{% endfor %}
+					</ol>
+
+
+
+
+					<div class="carousel-inner" role="listbox">
+
+						<div class="item active">
+							<a href="/zoom/{{categorie}}/{{date_projet}}/{{first_slide}}"> <img src="{% static 'vca/images/vincent/'%}{{categorie}}/{{date_projet}}/hr/{{first_slide}}" alt="{{first_slide}}" /></a>
+						</div>
+
+						{% for dia in data_slide %}
+						<div class="item">
+							<a href="/zoom/{{categorie}}/{{date_projet}}/{{dia}}"><img src="{% static 'vca/images/vincent/'%}{{categorie}}/{{date_projet}}/hr/{{dia}}" alt="{{dia}}" /></a>
+						</div>
+						{% endfor %}
+
+					</div>
+					<!--finde carousel-inner-->
+
+					<!--======= Navigation Buttons =========-->
+
+					<!--======= Left Button =========-->
+					<a class="left carousel-control thumbnail_text_carousel_control_left" href="#thumbnail_text_carousel" role="button" data-slide="prev">
+						<span class="fa fa-caret-square-o-left thumbnail_text_carousel_control_icons" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+
+					<!--======= Right Button =========-->
+					<a class="right carousel-control thumbnail_text_carousel_control_right" href="#thumbnail_text_carousel" role="button" data-slide="next">
+						<span class="fa fa-caret-square-o-right thumbnail_text_carousel_control_icons" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+
+
+
+					<!-- boutons pour stopper / reprendre le défilement des photos -->
+					<div id="carouselButtons">
+						<button id="BtnPlay" type="button" class="btn btn-default btn-xs">
+							<span class="glyphicon glyphicon-play"></span>
+						</button>
+
+						<button id="BtnPause" type="button" class="btn btn-default btn-xs">
+							<span class="glyphicon glyphicon-pause"></span>
+						</button>
+					</div>
+
+
+
+
+
+				</div>
+				<!--fin de  id="myCarousel"-->
+
+			</div>
+			<!--fin class="col-xs-12"-->
+		</section>
+
+
+		<div class="contenu_carousel">
+			<br>
+
+			<section class="row">
+				<!--Affichage du titre-->
+				<div class="col-xs-12">
+					<div class="grand-titre" contenteditable="true">
+						{% for ligne in titre %} {{ligne}}
+						<br /> {% endfor %}
+
+					</div>
+				</div>
+			</section>
+
+			<section class="row">
+				<!--Affichage de la fiche-->
+				<div class="col-xs-12">
+
+					<!--<blockquote style="font-size:1.5vw;text-align:right">-->
+					<div class="fiche" id="texte" contentEditable="true">
+						{% for ligne in fiche %} {{ligne}}
+						<br> {%endfor%}
+					</div>
+					<!--</blockquote>-->
+
+
+				</div>
+			</section>
+
+
+
+			<!--<div class="contenu"> <!--container-->
+			<section class="row">
+				<!--grille de vignettes après la fiche -->
+				{% for thumb in item_list %}
+				<a href="/zoom/{{categorie}}/{{date_projet}}/{{thumb}}">
+					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 magrille">
+						<img src="{% static 'vca/images/vincent/'%}{{categorie}}/{{date_projet}}/thumb/{{thumb}}" alt='{{thumb}}' class="img img-responsive full-width">
+					</div>
+				</a>
+				{% endfor %}
+			</section>
+			<!--</div>-->
+
+			<section class="row">
+				<div class="col-xs-12">
+					<div class="description">
+						{% for ligne in desc %} {{ligne}}
+						<br> {%endfor%}
+					</div>
+
+					<div id="summer">
+						<p>Hello Summernote</p>
+					</div>
+					<script>
+						$(document).ready(function () {
+							$('#summer').summernote();
+							window.alert('#summer');
+
+						});
+					</script>
+				</div>
+			</section>
+
+		</div>
+		<!-- class contenu -->
+	</div>
+
+
+	{% endblock %}

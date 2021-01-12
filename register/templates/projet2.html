@@ -1,0 +1,59 @@
+{% extends "bas.html" %}
+{% block titre %}
+{{title}}
+{% endblock %}
+{% block grand_titre %}
+<div class="projet_fiche__container largeur">
+    <div class="projet_fiche">
+        <div class="projet_fiche__titre">
+            <div>
+                <br>
+                <br>
+                {% for ligne in grand_titre %} {{ligne}}
+                <br /> {% endfor %}
+                <br>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block fiche %}
+
+<div class="projet_fiche__container largeur">
+    <br />
+    <div class="projet_fiche">
+        {% for ligne in fiche %} <p>{{ligne}}</p>
+        {% endfor %}
+        <br>
+        <hr>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block slide %}
+{% include "projet__slide.html"%}
+{% endblock %}
+
+{% block grid %}
+{% include "projet__grille.html"%}
+{% endblock %}
+
+{% block projet_description %}
+{{date_projet}}
+<a href="/trumbo/projects_{{date_projet}}_txt_us_desc_us">Edition</a>
+<div class="projet_fiche__container largeur">
+    <br />
+    <div class="projet_fiche">
+        desc = "projects/010401_canal/txt/us/desc_us.html"
+        {% include desc %}
+       
+        <br>
+        <hr>
+    </div>
+</div>
+{% endblock %}
+{% block article %}
+{% endblock %}

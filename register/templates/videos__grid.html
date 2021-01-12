@@ -1,0 +1,31 @@
+{% load static %}
+<div class="grid__container ">
+  <div class="grid__magic largeur">
+    {% for date_projet,projet,vignette,titre_lien,titre,lien,title_href,untitreesp,img_alt in item_list %}
+    <div class="grid__carte fadeIn20">
+      <picture>
+        <figure class="grid__figcaption">
+          {% if cook == "ok" %}
+          "{{categorie}}/{{date_projet}}"
+          <a class="myButton" href="/eff_proj/{{categorie}}/{{date_projet}}">Suppression du dossier</a>
+          {% endif %}
+          <a href="/video__player/{{lien}}/{{img_alt}}">
+            <img class="grid__img grid__img--hoover lazyload blur-up"
+              data-src="{% static '/'%}{{categorie}}/{{date_projet}}/thumb/{{vignette}}"
+              alt="{{img_alt}}" loading="lazy"/>
+          </a>
+          <figcaption class="grid__figcaption">
+            {% if cook == "ok" %}
+            <a class="myButton" href="/trumbo/{{categorie}}_{{date_projet}}_txt_us_titre_us">Edition</a>
+            {% endif %}
+            <div class="grid__desc vignette_titre">
+              {% include titre_lien %}
+            </div>
+          </figcaption>
+        </figure>
+      </picture>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<br>

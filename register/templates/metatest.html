@@ -1,0 +1,51 @@
+{% extends "bas.html" %} {% load static %}
+
+{% block titre %}
+{{title}}
+{% endblock %}
+{% block css %}
+
+
+<style>
+    .image_container {
+        display: flex;
+        justify-content: center;
+        z-index: -2;
+
+    }
+
+    .img_dim {
+
+        --main-width-image: calc((100vh - 60px) * 1.415 - 0px);
+        display: block;
+        max-width: 98vw;
+        width: var(--main-width-image);
+        background-color: grey;
+    }
+</style>
+{% endblock %}
+{% block slide %}
+{% endblock %}
+{% block grid %}
+{% endblock %}
+{% block projet_description %}
+<div class="projet_fiche__container largeur">
+    <br />
+    <h1 style="text-align: center;">EN CONSTRUCTION</h1>
+    <h2>{{meta_desc}}</h2>
+    <h3><a href="https://vincent.callebaut.fr/myhelp">Aide à la gestion des dossiers</a></h3>
+
+    <!-- <div id="upload"><a href="/upload/{{categorie}}/16_____new/new/new">Créer un Nouveau Dossier</a></div> -->
+    <div id="upload"><a href="/creation">Créer ou Modifier un Dossier</a></div>
+    <br>
+    <h1>Liste des {{cpt}} emails inscrits sur le site pour recevoir la newsletter</h1>
+   {% for visit in visiteurs %}
+    <li>{{visit.test}} - {{visit.ip}} - {{visit.page}} - {{visit.email}}</li>
+   {% endfor %}
+    <p>D{{cpt}}F</p>
+</div>
+{% endblock %}
+{% block article %}
+{% endblock %}
+{% block foot %}
+{% endblock %}

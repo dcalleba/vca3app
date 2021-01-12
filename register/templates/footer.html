@@ -1,0 +1,100 @@
+{% load static %}
+<style>
+    .calc-large {
+        --main-width: calc((100vh - 60px) * 1.415);
+        display: block;
+        max-width: 100vw;
+        width: var(--main-width);
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 98.0vw;
+        /*display: flex;
+    justify-content: center;*/
+    }
+</style>
+<div class="foot">
+    <div class="foot__container calc-large ">
+        <div class="foot__grid">
+            <div class="foot__col1">
+                <h3>STAY IN TOUCH</h3>
+                <br>
+                <div class="texte"> PHONE : 0033.1.43.43.08.56
+                    <br /> WEBSITE : www.vincent.callebaut.org
+                    <br /> EMAIL : vincent@callebaut.org
+                    <br /> POSTAL ADDRESS :
+                    <br /> Vincent Callebaut Architectures
+                    <br /> 2, rue de la Roquette
+                    <br /> 75011 Paris
+                    <br /> France
+                    <br />
+                </div>
+            </div>
+            <div class="foot__col2">
+                <h3>SUBSCRIBE TO OUR NEWSLETTER</h3>
+                <br>
+                <form method="POST" action ="/sauve_visiteur/">
+                    
+                    {% csrf_token %}
+                    <!-- Email Address -->
+                    {{ form.as_p }}
+                    <br />
+                    <button type="submit">Save</button>
+                    <br /> <br />
+                    <p>We promise that we will never share your e-mail address with any third party company.
+                    </p>
+                </form>
+            </div>
+            <div class="foot__col3">
+                <h3>LATEST PROJECTS</h3>
+                <div class="foot__grid__col3">
+                    <div class="img1">
+                        <a href="/object/{{tup.0}}/{{tup.2}}/projects" class="item-image overlay-hover scale-hover-2x">
+                            <img class="img_grid lazyload blur-up" alt="project"
+                                src="{% static 'projects/' %}{{tup.0}}/thumb/{{tup.1}}" alt="Project Image" loading="lazy">
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="/object/{{tup.3}}/{{tup.5}}/projects" class="item-image overlay-hover scale-hover-2x">
+                            <img class="img_grid lazyload blur-up" alt="project"
+                                src="{% static 'projects/' %}{{tup.3}}/thumb/{{tup.4}}" alt="Project Image" loading="lazy">
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="/object/{{tup.6}}/{{tup.8}}/projects" class="item-image overlay-hover scale-hover-2x">
+                            <img class="img_grid lazyload blur-up" alt="project"
+                                src="{% static 'projects/' %}{{tup.6}}/thumb/{{tup.7}}" alt="Project Image" loading="lazy">
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="/object/{{tup.9}}/{{tup.11}}/projects" class="item-image overlay-hover scale-hover-2x">
+                            <img class="img_grid lazyload blur-up" alt="project"
+                                src="{% static 'projects/' %}{{tup.9}}/thumb/{{tup.10}}" alt="Project Image" loading="lazy">
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="/object/{{tup.12}}/{{tup.14}}/projects"
+                            class="item-image overlay-hover scale-hover-2x">
+                            <img class="img_grid lazyload blur-up" alt="project"
+                                src="{% static 'projects/' %}{{tup.12}}/thumb/{{tup.13}}" alt="Project Image" loading="lazy">
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="/object/{{tup.15}}/{{tup.17}}/projects"
+                            class="item-image overlay-hover scale-hover-2x">
+                            <img class="img_grid lazyload blur-up" alt="project"
+                                src="{% static 'projects/' %}{{tup.15}}/thumb/{{tup.16}}" alt="Project Image" loading="lazy">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
+        
+        <br>
+        <div class="foot__copyright">
+            <p> Copyright : Vincent Callebaut Architectures</p>
+            <p> All rights reserved.</p>
+            <br>
+        </div>
+    </div>

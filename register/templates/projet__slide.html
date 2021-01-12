@@ -1,0 +1,17 @@
+<!-- *****************************************  slide projet **************************************** -->
+<div class="slide__cadre">
+        <div id="slider" class="slide">
+
+                <ul class="slides">
+                        {% for image,img_alt in item_list %}
+                        <li>
+                                <picture>
+                                        <source media="(max-width: 852px)" srcset={{image}} loading="lazy">
+                                        <img class="img lazyload blur-up slide__dim" data-src={{image}} alt="{{img_alt}}" loading="lazy">
+                                </picture>
+                        </li>
+                        {% endfor %}
+                </ul>
+        </div>
+</div>
+<!-- *************************************************************************************************** -->
