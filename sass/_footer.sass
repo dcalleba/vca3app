@@ -1,0 +1,95 @@
+*
+  box-sizing: border-box
+
+$couleur_fond: transparent
+.foot
+  width: 100%
+  margin: 0 
+  //background-color: $couleur_fond
+  color: white
+
+  &__container
+    margin-left: 5px
+    margin-right: 5px
+    background: black
+
+  &__col1
+    margin: 30px
+   
+  &__col2
+    text-align: center
+    margin: 30px
+   
+  &__col3
+    text-align: center
+    margin: 30px
+    
+  &__promise
+    text-align: center
+    margin: 30px
+    
+
+  &__form  
+    display: flex
+    justify-content: center
+    justify-items: center
+    justify-self: center
+
+  h3
+    //font-family: 'Montserrat', sans-serif
+    font-size: 16px
+
+
+.foot__titre, .foot__grid
+  margin: 0
+  display: grid
+  grid-template-columns: repeat(3, 1fr)
+
+
+
+
+.foot__grid__col3
+  padding-top: 5px
+  width: 100%
+  display: grid
+  height: 100%
+  grid-template-columns: repeat(3, 1fr)
+  grid-template-rows: auto
+  justify-items: center
+  align-items: center
+  align-content: space-evenly
+  column-gap: 5px
+
+.foot__copyright
+  text-align: center
+  padding: 0
+ 
+
+.img_grid
+  width: 100%
+  height: auto
+
+.sharethis-inline-share-buttons
+  margin: 10px
+
+/*# sourceMappingURL=footer.css.map
+
+
+@media only screen and (max-width: 852px)
+  
+  .foot
+    &__grid
+      grid-template-columns: 1fr
+      /*padding: 1em
+      /*grid-row-gap: 10px
+    &__col1
+      margin-top: 10px
+      margin-bottom: 10px
+    &__col2
+      margin-top: 10px
+      margin-bottom: 5px
+    &__col3
+      margin-top: 10px
+      margin-bottom: 10px
+
+

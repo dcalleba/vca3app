@@ -1,0 +1,59 @@
+
+$color_texte: black
+$color_fond: white
+.projet_titre
+    h3
+        //color: red
+        text-align: center
+        font-size: 16px
+    p
+        text-align: center
+        font-size: 14px
+
+    @media screen and (min-width: 620px)
+        margin-top: 30px
+        margin-bottom: 30px
+        h3
+            
+            font-size: 24px
+        p
+            font-size: 22px
+            
+.projet_fiche
+    //font-family: Calibri Regular, Arial
+    font-size: 14px 
+    margin-top: 0px 
+    margin-bottom: 15px 
+    //margin-left: auto
+    //margin-right: auto
+   
+    color: $color_texte
+    //background: $color_fond
+    text-align: left
+    font-style: normal
+   
+    & p
+        margin-bottom: 0.76em
+        letter-spacing: -0.004em
+        line-height: 1.58
+        word-break: break-word
+    
+    &__container
+        margin: 0 5px 0 5px
+        color: $color_texte
+
+   
+    @media screen and (min-width: 620px)
+        &__container
+            font-size: 18px 
+            width: 66%
+            margin: 0 auto
+            color: $color_texte
+            text-align: justify
+
+        & p
+            font-size: 18px
+            color: $color_texte
+            text-align: justify
+        
+

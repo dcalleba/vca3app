@@ -1,0 +1,156 @@
+* 
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    font-family: 'Lato', 'Arial', sans-serif
+
+$navbar_hauteur: 60px    
+$grande_marge: 15px
+
+
+.navbar 
+    //position: fixed
+    width: 100%
+    background: white
+    display: grid
+    grid-template-columns: 1fr 3fr
+    align-items: center
+    height: $navbar_hauteur
+    overflow: hidden
+    font-family: Droid Sans,arial
+    font-size: 14px
+    font-weight: 100
+    letter-spacing: 0.30px
+    text-transform: uppercase
+    z-index: 1000
+    opacity: 0.9
+
+    &__fluide
+        display: block
+        //background-color: violet
+        //width: 100vw
+        height: calc(#{$navbar_hauteur} + 0px)
+
+    &__logo
+        height: 50px
+        width: auto
+        justify-self: start
+        //margin-left: $grande_marge
+
+    &__ul 
+        list-style: none
+        display: flex
+        padding-right: 5px
+        justify-content: flex-end
+        //padding-right: $grande_marge
+        width: 100%
+
+    &__item a 
+        color: black
+        font-size: 14px
+        margin-left: 12px
+        font-weight: 400
+        text-decoration: none
+        transition: color 0.3s ease-out
+        &:hover
+            color: green
+
+@media only screen and (min-width: 748px) and (max-width: 1280px)
+    .navbar__item a
+        font-size: calc((100vh - 60px) * 0.01415 )
+
+
+
+.menu-toggle .bar 
+    width: 25px
+    height: 3px
+    background-color: darkgreen /* couleur burger */
+    margin: 5px auto
+    transition: all 0.6s ease-in-out
+    
+
+.menu-toggle 
+    justify-self: end
+    margin-right: 25px
+    display: none
+
+    &:hover 
+        cursor: pointer
+
+#mobile-menu.is-active .bar:nth-child(2) 
+    opacity: 0
+
+#mobile-menu.is-active .bar:nth-child(1)     
+    transform: translateY(8px) rotate(45deg)
+
+#mobile-menu.is-active .bar:nth-child(3) 
+    transform: translateY(-8px) rotate(-45deg)
+
+
+@media only screen and (max-width: 852px) 
+    
+    
+
+
+    /* MOBILE NAVIGATION */
+
+
+    .navbar 
+
+        &__logo
+            height: auto
+            width: 290px
+            justify-self: start
+            margin-left: $grande_marge
+
+        &__ul 
+            display: flex
+            flex-direction: column
+            position: fixed
+            justify-content: start
+            top: $navbar_hauteur
+            color: violet
+            width: var(--main-width)
+            height: calc(100vh - $navbar_hauteur)
+            transform: translate(-101%)
+            text-align: left
+            z-index: 1000
+            opacity: 1
+            //overflow: hidden
+
+        &__li 
+            padding: 15px
+
+        &__item a 
+            margin-left: 30px
+            line-height: 50px
+
+    
+
+    .navbar li:first-child 
+        margin-top: 10px
+    
+
+    .navbar li a 
+        font-size: 1rem
+    
+
+    .menu-toggle,
+    .bar 
+        display: block
+        cursor: pointer
+        margin-right: $grande_marge
+    
+
+    .mobile-nav 
+        background-color: white
+        transform: translate(0px) !important
+        opacity: 0
+        transition-property: opacity
+        transition-duration: 1s
+        transition-timing-function: linear
+
+    .mobile-nav
+        opacity: 1
+        
+
