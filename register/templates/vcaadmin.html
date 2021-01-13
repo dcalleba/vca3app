@@ -12,6 +12,7 @@
         justify-self: center;
         text-align: center;
         z-index: -2;
+
     }
 
     .img_dim {
@@ -434,17 +435,26 @@
         -ms-flex-align: center;
         align-items: center;
     }
+    .grid__item {
+    width: 100%;
+    padding: 1em 0;
+    border: 1px solid #999;
+    text-align: center;
+    }
 </style>
 {% endblock %}
 {% block slide %}
 <br /><br /><br />
 <div class="content__wrapper">
     <div class="grid__flex">
-        <div class="grid__item"><a href="/setAdminOn" class="button button-outline--green">Edition ON</a></div>
-        <div class="grid__item"><a href="/setAdminOff" class="button button-outline--red">Edition OFF</a></div>
-        <div class="grid__item"><a href="/setAdminOn" class="button button-outline--green">Edition ON</a></div>
-        <div class="grid__item"><a href="/setAdminOff" class="button button-outline--red">Edition OFF</a></div>
+        <div class="grid__item"><a href="/creation" class="button button-outline--green">Création ou Modification d'un Dossier </a></div>
     </div>
+    <div class="grid__flex">
+        <div class="grid__item"><a href="/setAdminOn" class="button button-outline--green">Edition ON</a></div>
+        <div class="grid__item"><a href="/setAdminOff" class="button button-outline--red">Edition OFF</a></div>
+        
+    </div>
+ 
 
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     <!-- <div class="grid__flex">
@@ -453,6 +463,7 @@
         <div class="grid__item">div in flex box</div>
     </div> -->
 </div>
+
 {% endblock %}
 {% block grid %}
 {% endblock %}
