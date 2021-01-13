@@ -955,23 +955,24 @@ def setAdminOn(request):
     response = HttpResponseRedirect('/')
     response.set_cookie('modif', 'ok', max_age=14400)
     return response
-    #return render(request,'index.html')
+    
 
 def setAdminOff(request):  
     response = HttpResponseRedirect('/')
     response.set_cookie('modif', 'no', max_age=86400)
     return response
-    #return render(request,'index.html')    
+    
 
 def vcaadmin(request,var):
     if var == "Roquette,2":
-        return render(request,'vcaadmin.html') 
-           
+        args = {"tup" : listlast(request)}
+        args['form'] = VisiteurForm()
+        return render(request,'vcaadmin.html',args) 
     else:
         response = HttpResponse('Modifications ne sont plus autorisées <br> <a href="https://vincent.callebaut.org">Cliquer ici pour désactiver  Edition sur tout le site</a>')
         response.set_cookie('modif', 'no', max_age=86400)
         return response
-        #return render(request,'index.html')
+       
         
 def _imgalt(request,categorie,date_projet):
     try:
