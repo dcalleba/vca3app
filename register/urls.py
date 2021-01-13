@@ -62,6 +62,7 @@ urlpatterns = [
     path('publicationstest/', views.publicationstest, name='publicationstest/'),
     path('setAdminOn/', views.setAdminOn,name='setAdminOn'),
     path('setAdminOff/', views.setAdminOff,name='setAdminOff'),
+    path('googleUpdate/', views.googleUpdate,name='googleUpdate'),
   
     
     #TODO: devier oject sur projet pur garder lesliens existants

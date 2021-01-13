@@ -1552,6 +1552,12 @@ def htmltxt(request, dossier):
     return (texte)
 
 
+def googleUpdate(request):
+    deschtm2txt(request)
+    titlehtm2txt(request)
+    return HttpResponseRedirect("/index")
+
+
 def deschtm2txt(request):
     cats = ['projects', 'exhibitions', 'publications', 'videos']
     cpt = 0
@@ -1568,7 +1574,7 @@ def deschtm2txt(request):
             with io.open(static+categorie+'/'+projet+'/txt/us/descnew.txt', 'w', encoding='UTF-8') as f:
                 f.write(test)
                 f.close()
-        time.sleep(5)
+        time.sleep(2)
     return HttpResponse(str(cpt)+' '+test)
 
 
@@ -1590,7 +1596,7 @@ def titlehtm2txt(request):
             with io.open(static+categorie+'/'+projet+'/txt/us/titlenew.txt', 'w', encoding='UTF-8') as f:
                 f.write(texte)
                 f.close()
-        time.sleep(5)
+        time.sleep(2)
     return HttpResponse(str(cpt)+' '+texte)
 
 
@@ -1768,137 +1774,3 @@ def publicationstest(request, categorie='publications', mode=None):
     args['cook'] = cook
     args['vigdef'] = vigdef
     return render(request, 'publications.html', args)
-
-
-# def publicationstest2(request, categorie='publications', mode=None):
-#     litmax = 150
-#     ip = _ip_visiteur(request)
-#     cook = _lacook(request)
-#     form = VisiteurForm()
-#     envisite = Visiteur(page='pulications', ip=ip, test=dh(request))
-#     envisite.save()
-
-#     modif = request.COOKIES.get('modif')
-
-#     racine = static + categorie+"/"
-#     dossier_projets = static + categorie + "/"
-#     liste_projets = os.listdir(dossier_projets)
-#     liste_projets.sort(reverse=True)
-#     item_list = []
-#     cpt = 0
-#     for date_projet in liste_projets:
-#         cpt = cpt+1
-#         if cpt >= litmax:
-#             break
-#         img_alt = _imgalt(request, categorie, date_projet)
-#         dossier = categorie+"/"+date_projet+"/"
-#         #desc_txt  = htmltxt(request,dossier)
-#         meta_desc = _metadesc(request, categorie, date_projet)
-#         desc_txt = meta_desc
-#         desc = ''
-
-#         # on recherche les images dns dossier hr
-#         cpt = cpt+1
-
-#         liste_images = os.listdir(dossier_projets+"/"+date_projet+'/hr/')
-#         liste_images.sort(reverse=False)
-#         try:
-#             vignette = liste_images[0]
-#             title_href = vignette[:-4]
-#         except:
-#             vignette = 'pbvig'
-#             title_href = ""
-#         projet = date_projet[7:len(date_projet)]  # on enleve la date du debut
-#         titre = ['pas de titre']
-#         untitre = ""
-#         try:
-#             #tit = os.listdir(racine+date_projet+"/txt/us/")
-#             # if 'tit' in tit[0]:
-#             #titrer = codecs.open(racine+date_projet+"/txt/us/"+tit[0], "r")
-#             titrer = codecs.open(racine+date_projet +
-#                                  "/txt/us/titre_us.txt", "r")
-#             untitre = titrer.readline()
-#             titre = titrer.readlines()
-#         except:
-#             titre = ['pas de titre']
-#             untitre = ""
-#             pass
-#         try:
-#             # titre sous vignette
-#             titre_lien = categorie+"/"+date_projet+"/txt/us/titre_us.html"
-#         except:
-#             titre_lien = "erreur2.html"
-
-#         try:
-#             fic_lien = codecs.open(racine+date_projet+"/txt/us/lien.txt", "r")
-#             lien = fic_lien.readline()
-#         except:
-#             lien = date_projet
-
-#         untitreesp = "VCA"
-#         try:
-#             untitreesp = untitre.replace(',', ' ')
-#             untitreesp = untitreesp.replace(' ', '_')
-#         except:
-#             pass
-
-#         vignette_desc = ""
-
-#         proj_titre = [date_projet]
-#         proj_titre.append(projet)
-#         proj_titre.append(vignette)
-#         proj_titre.append(titre_lien)
-#         proj_titre.append(vignette_desc)
-#         proj_titre.append(titre)
-#         proj_titre.append(lien)
-#         proj_titre.append(title_href)
-#         proj_titre.append(untitreesp)
-#         proj_titre.append(cook)
-#         proj_titre.append(img_alt)
-#         proj_titre.append(meta_desc)
-#         item_list.append(proj_titre)
-#     if categorie == 'projects':
-#         #meta_desc = "All PUBLICATIONS Vincent Callebaut Architectures Paris"
-#         menu = 'Projects'
-#         description = "Vincent Callebaut Architectures, Sustainable Architecture, Biomimicry Design, Paris Smart City 2050, Lilypad, Dragonfly, Tao Zhu Yin Yuan, Agora Garden"
-#         canonical = canon+'category/projects'
-#     if categorie == 'videos':
-#         menu = 'Videos'
-#         title = "All Vidéos"
-#         #meta_desc = "All Videos Vincent Callebaut Architectures Paris"
-#         description = "Vincent Callebaut Architectures, Talks, TEDx, TV Interviews, TF1, France 2, Arte, M6, LCP, City of Future, Sustainability, Energy Plus, Circular Economy"
-#         canonical = canon+"category/videos"
-#     if categorie == 'exhibitions':
-#         #meta_desc = "All exhibitions Vincent Callebaut Architectures Paris"
-#         menu = 'Exhibitions'
-#         description = "Vincent Callebaut Architectures, Exhibitions, Conferences, Lectures, International Architecture, Innovation Awards, Architecture Biennial, World Exhibition"
-#         canonical = canon+"category/exhibitions"
-#     if categorie == 'publications':
-#         #meta_desc = "All publications Vincent Callebaut Architectures Paris,-"
-#         menu = 'Publications'
-#         description = "Vincent Callebaut Architectures, Press Releases, Monographies, Books, Paris 2050, Fertile Cities, Archibiotic, Interviews, CNN, BBC, Time, Green Building"
-#         canonical = canon+"category/publications"
-
-#     title = categorie.capitalize()   # aussi utilisé our video
-#     if cpt < 5:
-#         vigdef = 'min'
-#     else:
-#         vigdef = 'full'
-#     args = {"untitreesp": ''}
-#     args['description'] = description
-#     args['item_list'] = item_list
-#     args['categorie'] = categorie
-#     args['mode'] = mode
-#     args['form'] = form
-#     args['title'] = title
-#     args['menu'] = menu
-#     args['meta_titre'] = "PUBLICATIONS"
-#     args['meta_desc'] = meta_desc
-#     #args['canonical']= canonical
-#     args['vignette'] = "vignette"
-#     args['titre_lien'] = titre_lien
-#     tup = listlast(request)
-#     args['tup'] = tup
-#     args['cook'] = cook
-#     args['vigdef'] = vigdef
-#     return render(request, 'publications.html', args)

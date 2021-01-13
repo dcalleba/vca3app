@@ -435,11 +435,12 @@
         -ms-flex-align: center;
         align-items: center;
     }
+
     .grid__item {
-    width: 100%;
-    padding: 1em 0;
-    border: 1px solid #999;
-    text-align: center;
+        width: 100%;
+        padding: 1em 0;
+        border: 1px solid #999;
+        text-align: center;
     }
 </style>
 {% endblock %}
@@ -447,14 +448,23 @@
 <br /><br /><br />
 <div class="content__wrapper">
     <div class="grid__flex">
-        <div class="grid__item"><a href="/creation" class="button button-outline--green">Création ou Modification d'un Dossier </a></div>
+        <div class="grid__item"><a href="/creation" class="button button-outline--green">Création ou Modification d'un
+                Dossier </a></div>
     </div>
     <div class="grid__flex">
         <div class="grid__item"><a href="/setAdminOn" class="button button-outline--green">Edition ON</a></div>
         <div class="grid__item"><a href="/setAdminOff" class="button button-outline--red">Edition OFF</a></div>
-        
+
     </div>
- 
+    <div class="grid__flex">
+        <div class="grid__item"><a href="/googleUpdate" class="button button-outline--green">Transfert les Datas pour
+                Référencement Google et Réseaux Sociaux durée: +/- 1 minute</a>
+            <p>A lancer une seule fois après avoir ajouté ou modifié des dossiers</p>
+            <p>Résultats dans la semaine pour les ajouts et plus longtemps pour les modifs</p>
+        </div>
+        <!-- <label for="file">File progress:</label>
+                <progress id="file" max="100" value="30"> 10% </progress> -->
+    </div>
 
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     <!-- <div class="grid__flex">
