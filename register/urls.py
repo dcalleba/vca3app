@@ -24,6 +24,8 @@ urlpatterns = [
     path('zoom/<slug:categorie>/<slug:date_projet>/<slug:thumb>', views.zoom, name='zoom'),
   
     #path('admin/', admin.site.urls),
+    path('acces/', views.acces, name='acces'),
+    path('emailsderniers/', views.emailsderniers, name='emailsderniers'),
     path('category/exhibitions/', views.exhibitions, name='exhibitions'),
     path('category/projects/', views.projects, name='projects'),
     path('category/publications/', views.publications, name='publications'),

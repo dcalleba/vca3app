@@ -1,0 +1,52 @@
+.button 
+    display: inline-block
+    padding: 13px 20px
+    outline: none
+    border: none
+    text-align: center
+    text-decoration: none
+    cursor: pointer
+    appearance: none
+
+    &__outline--green 
+        border: 1px solid green
+        background: transparent
+        color: green
+
+        &:hover
+            background: green
+            border: 1px solid green
+            color: white
+          
+    &__outline--red 
+        border: 1px solid red
+        background: transparent
+        color: red
+
+        &:hover
+            background: red
+            border: 1px solid red
+            color: white
+     
+.content__wrapper
+    //TODO https://codepen.io/thebabydino/pen/hgFno
+    $a: calc((100vh - 60px) * 1.415 - 0px)
+    *zoom: 1
+    margin: 0 auto
+    max-width: $a
+
+.grid__flex    
+    display: flex
+    gap: 10px
+    justify-content: space-between
+    align-items: center
+
+.grid__item 
+    width: 100%
+    margin-bottom: 10px
+    padding: 1em 0
+    border: 2px solid #999
+    text-align: center
+
+//th
+    //text-align: left

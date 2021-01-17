@@ -1,0 +1,42 @@
+{% extends "bas.html" %} {% load static %}
+
+<!--  -->
+{% block css %}
+
+{% endblock %}
+{% block slide %}
+
+<div class="content__wrapper">
+    <div class="grid__flex">
+        <h1>Liste des derniers accès au site vincent.callebaut.org </h1>
+
+    </div>
+    <div class="grid__flex">
+        <table>
+            <th style="text-align: left">Date</th>
+            <th style="text-align: left">IP visiteur </th>
+            <TH style="text-align: left">Page Vue</TH>
+            <th style="text-align: left">Email Ajouté</th>
+            {% for visit in visiteurs %}
+            <tr>
+                <td>{{visit.test2}}</td>
+                <td>{{visit.ip}} </td>
+                <td>{{visit.page}} </td>
+                <td>{{visit.email}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </div>
+    <!-- <div class="grid__flex">
+        <div class="grid__item">div in flex box</div>
+        <div class="grid__item">div in flex box</div>
+        <div class="grid__item">div in flex box</div>
+    </div> -->
+</div>
+
+{% endblock %}
+{% block grid %}
+{% endblock %}
+{% block article %}
+{% endblock %}

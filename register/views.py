@@ -64,16 +64,40 @@ def video__player(request, lien="1SVCbWFtn3s", untitreesp='danieldefaut'):
     args['meta_titre'] = titre_espace
     return render(request, 'video__player.html', args)
 
+def acces(request):
+    if _lacook(request) == 'ok':
+        args = {"tup": listlast(request)}
+        args['form'] = VisiteurForm()
+        visiteurs = Visiteur.objects.raw(
+                    "Select * from register_visiteur  where test2 > ' ' order by test2 desc limit 10000 "
+                    )
+        cpt = Visiteur.objects.all().count()
+        args['visiteurs'] = visiteurs
+        args['cook'] = _lacook(request)
+        return render(request, 'acces.html', args)
+    else:
+        return HttpResponseRedirect("/index")
+        
 
+
+def emailsderniers(request):
+    args = {"tup": listlast(request)}
+    args['form'] = VisiteurForm()
+    visiteurs = Visiteur.objects.raw(
+                "Select * from register_visiteur  where test2 > ' ' and email > ' ' order by test2 desc limit 10000 "
+                )
+    # visiteurs = Visiteur.objects.all().order_by(
+    #     '-test')  # Nous sélectionnons tous nos articles
+    cpt = Visiteur.objects.all().count()
+    args['visiteurs'] = visiteurs
+    return render(request, 'emailsderniers.html', args)
+    
 def vigvideo(request, categorie, date_projet):
-
     if request.method == "POST":
         projet = date_projet[7:]
         racine = static + 'videos/'
-
         files = request.FILES.getlist('myfiles')
         dossier = request.POST.get('dossier')
-
         image = Image.open(files[0])
         w, h = image.size
         ratio = w/float(h)
@@ -144,7 +168,7 @@ def sauve_visiteur(request):
         form = VisiteurForm(request.POST or None)
         if form.is_valid():
             mail = request.POST.get("email")
-            testMail = Visiteur(email=mail, ip=ip, test=dh(request))
+            testMail = Visiteur(email=mail, ip=ip, test2=dh(request))
             testMail.save()
             #select =  User.objects.filter(email='daniel@callebaut.org')
             # if select > 0:
@@ -162,7 +186,7 @@ def index(request):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='index', ip=ip, test=dh(request))
+    envisite = Visiteur(page='index', ip=ip, test2=dh(request))
     envisite.save()
 
     dossier_projets = static + "/projects/"
@@ -206,7 +230,7 @@ def cv(request, mode='user'):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='cv', ip=ip, test=dh(request))
+    envisite = Visiteur(page='cv', ip=ip, test2=dh(request))
     envisite.save()
 
     objet = ""
@@ -336,7 +360,7 @@ def contact(request, mode='user'):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='contact', ip=ip, test=dh(request))
+    envisite = Visiteur(page='contact', ip=ip, test2=dh(request))
     envisite.save()
     titrecont1 = open(static + 'contact/txt/us/titre_us.txt')
     titrecont = titrecont1.readlines()
@@ -392,7 +416,7 @@ def projet(request, date_projet='x', projet='aequorea', categorie="projects", mo
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page=projet, ip=ip, test=dh(request))
+    envisite = Visiteur(page=projet, ip=ip, test2=dh(request))
     envisite.save()
 
     erreur = ''
@@ -608,7 +632,7 @@ def projects(request, categorie='projects', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='projets', ip=ip, test=dh(request))
+    envisite = Visiteur(page='projets', ip=ip, test2=dh(request))
     envisite.save()
     racine = static + categorie+"/"
     dossier_projets = static + categorie + "/"
@@ -722,7 +746,7 @@ def publications(request, categorie='publications', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='pulications', ip=ip, test=dh(request))
+    envisite = Visiteur(page='pulications', ip=ip, test2=dh(request))
     envisite.save()
 
     modif = request.COOKIES.get('modif')
@@ -853,7 +877,7 @@ def exhibitions(request, categorie='exhibitions', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='exhibitions', ip=ip, test=dh(request))
+    envisite = Visiteur(page='exhibitions', ip=ip, test2=dh(request))
     envisite.save()
 
     racine = static + categorie+"/"
@@ -997,7 +1021,7 @@ def videos(request, categorie='videos', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='vidéos', ip=ip, test=dh(request))
+    envisite = Visiteur(page='vidéos', ip=ip, test2=dh(request))
     envisite.save()
     racine = static + categorie+"/"
     dossier_projets = static + categorie + "/"
@@ -1326,7 +1350,7 @@ def footer__email(request):
         form = VisiteurForm(request.POST or None)
         if form.is_valid():
             mail = request.POST.get("email")
-            testMail = Visiteur(email=mail, ip=ip, test=dh(request))
+            testMail = Visiteur(email=mail, ip=ip, test2=dh(request))
             testMail.save()
             #select =  User.objects.filter(email='daniel@callebaut.org')
             # if select > 0:
@@ -1647,7 +1671,7 @@ def publicationstest(request, categorie='publications', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='pulications', ip=ip, test=dh(request))
+    envisite = Visiteur(page='pulications', ip=ip, test2=dh(request))
     envisite.save()
 
     modif = request.COOKIES.get('modif')
