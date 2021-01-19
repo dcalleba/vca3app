@@ -66,14 +66,62 @@ def video__player(request, lien="1SVCbWFtn3s", untitreesp='danieldefaut'):
 
 def acces(request):
     if _lacook(request) == 'ok':
+        #qf = Visiteur.objects.all()
+        jour =  "2021-01-19"
+        q = Visiteur.objects.filter(test2__contains=jour)
+        #f = {'test2__contains':"15:",'test2__contains': jour+""}
+        #cpt15 = qf.filter(**f).count()
+        cpt1 = Visiteur.objects.filter(test2__contains= jour+" 01:").count()
+        cpt2 = Visiteur.objects.filter(test2__contains= jour+" 02:").count()
+        cpt3 = Visiteur.objects.filter(test2__contains= jour+" 03:").count()
+        cpt4 = Visiteur.objects.filter(test2__contains= jour+" 04:").count()
+        cpt5 = Visiteur.objects.filter(test2__contains= jour+" 05:").count()
+        cpt6 = Visiteur.objects.filter(test2__contains= jour+" 06:").count()
+        cpt7 = Visiteur.objects.filter(test2__contains= jour+" 07:").count()
+        cpt8 = Visiteur.objects.filter(test2__contains= jour+" 08:").count()
+        cpt9 = Visiteur.objects.filter(test2__contains= jour+" 09:").count()
+        cpt10 = Visiteur.objects.filter(test2__contains= jour+" 10:").count()
+        cpt11 = Visiteur.objects.filter(test2__contains= jour+" 11:").count()
+        cpt12 = Visiteur.objects.filter(test2__contains= jour+" 12:").count()
+        cpt13 = Visiteur.objects.filter(test2__contains= jour+" 13:").count()
+        cpt14 = Visiteur.objects.filter(test2__contains= jour+" 14:").count()
+        cpt15 = Visiteur.objects.filter(test2__contains= jour+" 15:").count()
+        cpt16 = Visiteur.objects.filter(test2__contains= jour+" 16:").count()
+        cpt17 = Visiteur.objects.filter(test2__contains= jour+" 17:").count()
+        cpt18 = Visiteur.objects.filter(test2__contains= jour+" 18:").count()
+        cpt19 = Visiteur.objects.filter(test2__contains= jour+" 19:").count()
+        cpt20 = Visiteur.objects.filter(test2__contains= jour+" 20:").count()
+        cpt21 = Visiteur.objects.filter(test2__contains= jour+" 21:").count()
+        cpt22 = Visiteur.objects.filter(test2__contains= jour+" 22:").count()
+        cpt23 = Visiteur.objects.filter(test2__contains= jour+" 23:").count()
+        cpt24 = Visiteur.objects.filter(test2__contains= jour+" 24:").count()
+        qty = q.count()
         args = {"tup": listlast(request)}
         args['form'] = VisiteurForm()
-        visiteurs = Visiteur.objects.raw(
-                    "Select * from register_visiteur  where test2 > ' ' order by test2 desc limit 10000 "
-                    )
-        cpt = Visiteur.objects.all().count()
+        # visiteurs = Visiteur.objects.raw(
+        #             "Select * from register_visiteur  where test2 like '%2021-01-19%' order by test2 desc limit 10000 "
+        #             )
+        visiteurs = Visiteur.objects.filter(test2__contains= jour+"").order_by('-test2')
+        #cpt = Visiteur.objects.all().count()
         args['visiteurs'] = visiteurs
         args['cook'] = _lacook(request)
+        args['cpt'] = qty
+        args['cpt9'] = cpt9
+        args['cpt10'] = cpt10
+        args['cpt11'] = cpt11
+        args['cpt12'] = cpt12
+        args['cpt13'] = cpt13
+        args['cpt14'] = cpt14
+        args['cpt15'] = cpt15
+        args['cpt16'] = cpt16
+        args['cpt17'] = cpt17
+        args['cpt18'] = cpt18
+        args['cpt19'] = cpt19
+        args['cpt20'] = cpt20
+        args['cpt21'] = cpt21
+        args['cpt22'] = cpt22
+        args['cpt23'] = cpt23
+        args['cpt24'] = cpt24
         return render(request, 'acces.html', args)
     else:
         return HttpResponseRedirect("/index")
@@ -81,16 +129,17 @@ def acces(request):
 
 
 def emailsderniers(request):
-    args = {"tup": listlast(request)}
-    args['form'] = VisiteurForm()
-    visiteurs = Visiteur.objects.raw(
-                "Select * from register_visiteur  where test2 > ' ' and email > ' ' order by test2 desc limit 10000 "
-                )
-    # visiteurs = Visiteur.objects.all().order_by(
-    #     '-test')  # Nous sélectionnons tous nos articles
-    cpt = Visiteur.objects.all().count()
-    args['visiteurs'] = visiteurs
-    return render(request, 'emailsderniers.html', args)
+    if _lacook(request) == 'ok':
+        args = {"tup": listlast(request)}
+        args['form'] = VisiteurForm()
+        visiteurs = Visiteur.objects.raw(
+                    "Select * from register_visiteur  where test2 > ' ' and email > ' ' order by test2 desc limit 10000 "
+                    )
+        cpt = Visiteur.objects.all().count()
+        args['visiteurs'] = visiteurs
+        return render(request, 'emailsderniers.html', args)
+    else:
+        return HttpResponseRedirect("/index")
     
 def vigvideo(request, categorie, date_projet):
     if request.method == "POST":
@@ -746,7 +795,7 @@ def publications(request, categorie='publications', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='pulications', ip=ip, test2=dh(request))
+    envisite = Visiteur(page='Pulications', ip=ip, test2=dh(request))
     envisite.save()
 
     modif = request.COOKIES.get('modif')
@@ -979,14 +1028,16 @@ def setAdminOff(request):
     return response
 
 
-def vcaadmin(request, var):
-    if var == "Roquette,2":
-        args = {"tup": listlast(request)}
-        args['form'] = VisiteurForm()
-        return render(request, 'vcaadmin.html', args)
+def vcaadmin(request, var=''):
+    args = {"tup": listlast(request)}
+    args['form'] = VisiteurForm()
+    if var == "Roquette,2":     
+        response = render(request, 'vcaadmin.html', args)
+        response.set_cookie('modif', 'ok', max_age=14400)
+        return response
     else:
-        response = HttpResponse(
-            'Modifications ne sont plus autorisées <br> <a href="https://vincent.callebaut.org">Cliquer ici pour désactiver  Edition sur tout le site</a>')
+        response = render(request, 'vcaadmin.html', args)
+           
         response.set_cookie('modif', 'no', max_age=86400)
         return response
 
@@ -1124,6 +1175,9 @@ def videos(request, categorie='videos', mode=None):
 
 
 def zoom(request, categorie="projects", date_projet="150527_woodenorchids", thumb='test'):
+    ip = _ip_visiteur(request)
+    envisite = Visiteur(page='z '+date_projet , ip=ip, test2=dh(request))
+    envisite.save()
     tup = listlast(request)
     form = VisiteurForm()
     image_lien = categorie+"/"+date_projet+"/hr/"+thumb

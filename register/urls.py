@@ -46,6 +46,7 @@ urlpatterns = [
     path('trumbo/', views.trumbo, name='trumbo'),  
     path('upload/<kiwcom>', views.upload,name='upload'),
     path('vcaadmin/<var>', views.vcaadmin,name='vcaadmin'),
+    path('vcaadmin/', views.vcaadmin,name='vcaadmin'),
     path('filesave/<slug:lien>/<slug:data>', views.filesave, name='filesave'), 
     path('myadmin/', views.myadmin,name='myadmin'),
     path('textareasub/', views.textareasub,name='textareasub'),
