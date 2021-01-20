@@ -67,10 +67,10 @@ def video__player(request, lien="1SVCbWFtn3s", untitreesp='danieldefaut'):
 def acces(request):
     if _lacook(request) == 'ok':
         #qf = Visiteur.objects.all()
-        jour =  "2021-01-19"
-        q = Visiteur.objects.filter(test2__contains=jour)
         #f = {'test2__contains':"15:",'test2__contains': jour+""}
         #cpt15 = qf.filter(**f).count()
+        jour =  "2021-01-20"
+        q = Visiteur.objects.filter(test2__contains=jour)
         cpt1 = Visiteur.objects.filter(test2__contains= jour+" 01:").count()
         cpt2 = Visiteur.objects.filter(test2__contains= jour+" 02:").count()
         cpt3 = Visiteur.objects.filter(test2__contains= jour+" 03:").count()
@@ -94,18 +94,29 @@ def acces(request):
         cpt21 = Visiteur.objects.filter(test2__contains= jour+" 21:").count()
         cpt22 = Visiteur.objects.filter(test2__contains= jour+" 22:").count()
         cpt23 = Visiteur.objects.filter(test2__contains= jour+" 23:").count()
-        cpt24 = Visiteur.objects.filter(test2__contains= jour+" 24:").count()
+        cpt24 = Visiteur.objects.filter(test2__contains= jour+" 00:").count()
         qty = q.count()
-        args = {"tup": listlast(request)}
-        args['form'] = VisiteurForm()
+       
         # visiteurs = Visiteur.objects.raw(
         #             "Select * from register_visiteur  where test2 like '%2021-01-19%' order by test2 desc limit 10000 "
         #             )
-        visiteurs = Visiteur.objects.filter(test2__contains= jour+"").order_by('-test2')
+        visiteurs = Visiteur.objects.filter(test2__contains= jour).order_by('-test2')
+        petite_liste = Visiteur.objects.filter(test2__contains=jour).order_by('-test2')[0:300]
         #cpt = Visiteur.objects.all().count()
+        args = {"tup": listlast(request)}
+        args['form'] = VisiteurForm()
         args['visiteurs'] = visiteurs
         args['cook'] = _lacook(request)
         args['cpt'] = qty
+        args['petite_liste'] = petite_liste
+        args['cpt1'] = cpt1
+        args['cpt2'] = cpt2
+        args['cpt3'] = cpt3
+        args['cpt4'] = cpt4
+        args['cpt5'] = cpt5
+        args['cpt6'] = cpt6
+        args['cpt7'] = cpt7
+        args['cpt8'] = cpt8
         args['cpt9'] = cpt9
         args['cpt10'] = cpt10
         args['cpt11'] = cpt11

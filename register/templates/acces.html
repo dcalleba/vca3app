@@ -2,7 +2,6 @@
 
 <!--  -->
 {% block css %}
-
 {% endblock %}
 {% block slide %}
 
@@ -11,11 +10,14 @@
         <h2>Liste des derniers accès au site vincent.callebaut.org </h2>
     </div>
     <div class="grid__flex">
+        <h2 style="color: red">En construction, liste limitée volontairement, les pages z sont les pages zoom </h2>
+    </div>
+    <div class="grid__flex">
         <h1>Pages ouvertes aujourd'hui : {{cpt}}</h1>
     </div>
     <div class="grid__flex">
         <h3>24h00 : {{cpt24}}</h3>
-        <h3>01h00 : {{cp1}}</h3>
+        <h3>01h00 : {{cpt1}}</h3>
         <h3>02h00 : {{cpt2}}</h3>
         <h3>03h00 : {{cpt3}}</h3>
         <h3>04h00 : {{cpt4}}</h3>
@@ -48,7 +50,7 @@
             <th style="text-align: left">IP visiteur </th>
             <TH style="text-align: left">Page Vue</TH>
             <th style="text-align: left">Email Ajouté</th>
-            {% for visit in visiteurs %}
+            {% for visit in petite_liste %}
             <tr>
                 <td>{{visit.test2}}</td>
                 <td>{{visit.ip}} </td>
