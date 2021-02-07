@@ -2,6 +2,17 @@
 
 <!--  -->
 {% block css %}
+<style type="text/css">
+    table{
+        border: 1px solid black;
+    }
+    td {
+      width: 100px;
+      text-align: center;
+      border: 1px solid black;
+    }
+
+    </style>
 {% endblock %}
 {% block slide %}
 
@@ -13,7 +24,28 @@
         <h2 style="color: red">En construction, liste limitée volontairement, les pages z sont les pages zoom </h2>
     </div>
     <div class="grid__flex">
-        <h1>Pages ouvertes aujourd'hui : {{cpt}}</h1>
+        <h1>Pages ouvertes aujourd'hui : {{cpt}} </h1>
+    </div>
+    <div class="grid__flex">
+        <h1>Historique des pages ouvertes des derniers jours : 
+            <table>
+                <thead>
+                    <tr>
+                        <th>J-1</th><th>J-2</th><th>J-3</th><th>J-4</th><th>J-5</th><th>J-6</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{qmoins1}}</td>
+                        <td>{{qmoins2}}</td>
+                        <td>{{qmoins3}}</td>
+                        <td>{{qmoins4}}</td>
+                        <td>{{qmoins5}}</td>
+                        <td>{{qmoins6}}</td>
+                    </tr>
+                </tbody>
+            </table>
+    </h1>
     </div>
     <div class="grid__flex">
         <h3>24h00 : {{cpt24}}</h3>

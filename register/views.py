@@ -32,14 +32,14 @@ import json
 import decimal
 import datetime
 import time
-
+from datetime import datetime,timedelta
 from django.core.files.storage import FileSystemStorage
 from django.core import serializers
 from .models import Visiteur
 from .forms import VisiteurForm
 #import PIL
 from PIL import Image, ImageOps
-import datetime
+
 
 from urllib.request import Request, urlopen
 import requests
@@ -69,8 +69,24 @@ def acces(request):
         #qf = Visiteur.objects.all()
         #f = {'test2__contains':"15:",'test2__contains': jour+""}
         #cpt15 = qf.filter(**f).count()
-        jour =  "2021-01-20"
-        q = Visiteur.objects.filter(test2__contains=jour)
+        jour = datetime.now().strftime('%Y-%m-%d')
+        moins1 = (datetime.now() - timedelta(1)).strftime("%Y-%m-%d")
+        moins2 = (datetime.now() - timedelta(2)).strftime("%Y-%m-%d")
+        moins3 = (datetime.now() - timedelta(3)).strftime("%Y-%m-%d")
+        moins4 = (datetime.now() - timedelta(4)).strftime("%Y-%m-%d")
+        moins5 = (datetime.now() - timedelta(5)).strftime("%Y-%m-%d")
+        moins6 = (datetime.now() - timedelta(6)).strftime("%Y-%m-%d")
+        #jour =  "2021-01-28"
+        qty = Visiteur.objects.filter(test2__contains=jour).count()
+
+        #qty = Visiteur.objects.filter(test2__contains=moins1).count()
+        qmoins1 = Visiteur.objects.filter(test2__contains=moins1).count()
+        qmoins2 = Visiteur.objects.filter(test2__contains=moins2).count()
+        qmoins3 = Visiteur.objects.filter(test2__contains=moins3).count()
+        qmoins4 = Visiteur.objects.filter(test2__contains=moins4).count()
+        qmoins5 = Visiteur.objects.filter(test2__contains=moins5).count()
+        qmoins6 = Visiteur.objects.filter(test2__contains=moins6).count()
+       
         cpt1 = Visiteur.objects.filter(test2__contains= jour+" 01:").count()
         cpt2 = Visiteur.objects.filter(test2__contains= jour+" 02:").count()
         cpt3 = Visiteur.objects.filter(test2__contains= jour+" 03:").count()
@@ -95,7 +111,7 @@ def acces(request):
         cpt22 = Visiteur.objects.filter(test2__contains= jour+" 22:").count()
         cpt23 = Visiteur.objects.filter(test2__contains= jour+" 23:").count()
         cpt24 = Visiteur.objects.filter(test2__contains= jour+" 00:").count()
-        qty = q.count()
+        
        
         # visiteurs = Visiteur.objects.raw(
         #             "Select * from register_visiteur  where test2 like '%2021-01-19%' order by test2 desc limit 10000 "
@@ -133,6 +149,13 @@ def acces(request):
         args['cpt22'] = cpt22
         args['cpt23'] = cpt23
         args['cpt24'] = cpt24
+        args['qmoins1'] = qmoins1
+        args['qmoins2'] = qmoins2
+        args['qmoins3'] = qmoins3
+        args['qmoins4'] = qmoins4
+        args['qmoins5'] = qmoins5
+        args['qmoins6'] = qmoins6
+       
         return render(request, 'acces.html', args)
     else:
         return HttpResponseRedirect("/index")
@@ -239,7 +262,7 @@ def sauve_visiteur(request):
 
 
 def dh(request):
-    return datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+    return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 
 def index(request):
@@ -290,7 +313,7 @@ def cv(request, mode='user'):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='cv', ip=ip, test2=dh(request))
+    envisite = Visiteur(page='Dossier CV', ip=ip, test2=dh(request))
     envisite.save()
 
     objet = ""
@@ -420,7 +443,7 @@ def contact(request, mode='user'):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='contact', ip=ip, test2=dh(request))
+    envisite = Visiteur(page='Dossier Contact', ip=ip, test2=dh(request))
     envisite.save()
     titrecont1 = open(static + 'contact/txt/us/titre_us.txt')
     titrecont = titrecont1.readlines()
@@ -692,7 +715,7 @@ def projects(request, categorie='projects', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='projets', ip=ip, test2=dh(request))
+    envisite = Visiteur(page='Dossier Projets', ip=ip, test2=dh(request))
     envisite.save()
     racine = static + categorie+"/"
     dossier_projets = static + categorie + "/"
@@ -806,7 +829,7 @@ def publications(request, categorie='publications', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='Pulications', ip=ip, test2=dh(request))
+    envisite = Visiteur(page='Dossier Publications', ip=ip, test2=dh(request))
     envisite.save()
 
     modif = request.COOKIES.get('modif')
@@ -937,7 +960,7 @@ def exhibitions(request, categorie='exhibitions', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='exhibitions', ip=ip, test2=dh(request))
+    envisite = Visiteur(page='Dossier Exhibitions', ip=ip, test2=dh(request))
     envisite.save()
 
     racine = static + categorie+"/"
@@ -1083,7 +1106,7 @@ def videos(request, categorie='videos', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='vidéos', ip=ip, test2=dh(request))
+    envisite = Visiteur(page='Dossier Vidéos', ip=ip, test2=dh(request))
     envisite.save()
     racine = static + categorie+"/"
     dossier_projets = static + categorie + "/"
