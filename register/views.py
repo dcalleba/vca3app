@@ -309,6 +309,8 @@ def index(request):
     return render(request, 'index.html', args)
 
 
+
+
 def cv(request, mode='user'):
     ip = _ip_visiteur(request)
     cook = _lacook(request)

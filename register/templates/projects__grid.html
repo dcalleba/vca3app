@@ -12,9 +12,15 @@
           <a class="myButton" href="/eff_proj/{{categorie}}/{{date_projet}}">Suppression du dossier</a>
           {% endif %}
           <a href="/object/{{date_projet}}/{{projet}}/{{categorie}}" title="{{vignette_titre}}">
+
             <img class="lazyload blur-up grid_img__box grid__img grid__img--hover "
               data-src="{% static '/'%}{{categorie}}/{{date_projet}}/thumb/{{vignette}}" loading="lazy"
               alt="{{img_alt}}" />
+
+            <!-- <img class="grid_img__box grid__img grid__img--hover "
+              data-src="{% static '/'%}{{categorie}}/{{date_projet}}/thumb/{{vignette}}" 
+              alt="{{img_alt}}" /> -->
+
           </a>
           <figcaption class="grid__figcaption">
             {% if cook == "ok" %}
