@@ -16,6 +16,7 @@ from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 from django.template import RequestContext, Context, loader
 from django.forms import modelformset_factory
+from django.db.models import Max
 #from django import forms
 import logging
 from pprint import pprint
@@ -44,6 +45,8 @@ from PIL import Image, ImageOps
 from urllib.request import Request, urlopen
 import requests
 import re
+
+import operator
 
 static = '/home/dcallebaut/apps/vcastatic/'
 canon = 'https://vincent.callebaut.org/'
@@ -166,11 +169,14 @@ def emailsderniers(request):
     if _lacook(request) == 'ok':
         args = {"tup": listlast(request)}
         args['form'] = VisiteurForm()
-        visiteurs = Visiteur.objects.raw(
-                    "Select * from register_visiteur  where test2 > ' ' and email > ' ' order by test2 desc limit 10000 "
-                    )
-        cpt = Visiteur.objects.all().count()
+       
+        products = Visiteur.objects.filter(email__contains = '@').order_by('email','test2').distinct('email')
+        visiteurs = sorted(products, key=operator.attrgetter('test2'), reverse=True)[:1000]
+       
+        distinct = Visiteur.objects.filter(email__contains = '@').distinct('email').count()
         args['visiteurs'] = visiteurs
+      
+        args['distinct'] = distinct 
         return render(request, 'emailsderniers.html', args)
     else:
         return HttpResponseRedirect("/index")
