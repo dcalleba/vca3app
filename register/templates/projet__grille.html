@@ -8,10 +8,10 @@
         <a href="/zoom/{{categorie}}/{{date_projet}}/{{thumb}}" class="">
          <!-- <p>D{{vigdef}}F</p> -->
           {% if vigdef == 'min' %}
-          <img class="grid__img grid__img--hover lazyload blur-up grid_img__box" src="/static/{{categorie}}/{{date_projet}}/thumb/{{thumb}}.jpg" alt="{{img_alt}} {{thumb}}" title="Template : {{thumb}}" loading="lazy" />
+          <img class="grid__img grid__img--hover lazyload blur-up grid_img__box" src="/static/{{categorie}}/{{date_projet}}/thumb/{{thumb}}.jpg" width="720" height="509" alt="{{img_alt}} {{thumb}}" title="Template : {{thumb}}" loading="lazy" />
           {% endif %}
           {% if vigdef != 'min' %}
-          <img class="grid__img grid__img--hover lazyload blur-up grid_img__box" src="/static/{{categorie}}/{{date_projet}}/hr/{{thumb}}.jpg" alt="{{img_alt}} {{thumb}}" title="Template : {{thumb}}" loading="lazy" />
+          <img loading="lazy" class="blur-up grid__img grid__img--hover  grid_img__box" src="/static/{{categorie}}/{{date_projet}}/thumb/{{thumb}}.jpg" width="720" height="509" alt="{{img_alt}} {{thumb}}" title="Template : {{thumb}}" />
           {% endif %}
         </a>
       </picture>

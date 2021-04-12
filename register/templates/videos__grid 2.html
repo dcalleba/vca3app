@@ -1,20 +1,18 @@
 {% load static %}
 <div class="grid__container ">
   <div class="grid__magic largeur">
-    {% for date_projet,projet,vignette,titre_lien,vignette_desc,titre,lien,titre_href,untitreesp,modif,img_alt,meta_desc in item_list %}
-    <div class="grid__carte">
+    {% for date_projet,projet,vignette,titre_lien,titre,lien,title_href,untitreesp,img_alt in item_list %}
+    <div class="grid__carte fadeIn20">
       <picture>
         <figure class="grid__figcaption">
           {% if cook == "ok" %}
           "{{categorie}}/{{date_projet}}"
           <a class="myButton" href="/eff_proj/{{categorie}}/{{date_projet}}">Suppression du dossier</a>
           {% endif %}
-          <a href="/object/{{date_projet}}/{{projet}}/{{categorie}}" title="{{vignette_titre}}">
-            <img  loading="lazy" class="blur-up grid_img__box grid__img grid__img--hover "
-             
-              src = "{% static '/'%}{{categorie}}/{{date_projet}}/thumb/{{vignette}}"
-             width="720" height="509"
-              alt="{{img_alt}}"  />
+          <a href="/video__player/{{lien}}/{{img_alt}}">
+            <img loaded="lazy" class="grid__img grid__img--hoover "
+              src="{% static '/'%}{{categorie}}/{{date_projet}}/thumb/{{vignette}}" width="720" height="390" alt="{{img_alt}}"
+               />
           </a>
           <figcaption class="grid__figcaption">
             {% if cook == "ok" %}

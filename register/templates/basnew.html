@@ -1,5 +1,6 @@
-{% load static %}
+
 <!DOCTYPE html>
+{% load static %}
 <html lang="en-US" prefix="og: http://ogp.me/ns#">
 
 <head>
@@ -15,7 +16,7 @@
         gtag('config', 'UA-4971504-1');
     </script>
 
-
+<!-- <script src="{% static 'js/lazysizes.min.js' %}"></script> -->
     {% block meta %}
     <title>{{meta_titre}}</title>
     <meta name="title" content="{{meta_titre}}" />
@@ -64,11 +65,13 @@
     <meta name="google-site-verification" content="bUmRgwDIWvAsaztlKM_EbiYs6M3huQCf5BZGkH15o2g" />
 
     <!-- ***************************    Chargement js  ************************************ -->
-    <script src="{% static '/js/jquery.js' %}"></script>
+  
 
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js" async='async'
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
 
-
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
    
 
     <!-- ***************************    Chargement css  ************************************ -->
@@ -121,7 +124,6 @@
 
         .haut-calc-large {
             --main-width: calc((100vh - 60px) * 1.415);
-            display: block;
             max-width: 100vw;
             width: var(--main-width);
             display: flex;
@@ -150,7 +152,7 @@
 
     <div class="haut-calc-large">
         <nav class="navbar">
-            <img class="navbar__logo lazyload blur-up" alt="project"
+            <img class="navbar__logo blur-up" alt="project"
                 src="{% static 'images/vincent_logomd1.png' %}" width="700px" height="100px" alt='Company Logo'>
 
             <div class="menu-toggle" id="mobile-menu">
@@ -200,58 +202,24 @@
     {% endblock %}
 
 
-
-
-
     <script>
         $('.menu-toggle').click(function () {
             $(".nav").toggleClass("mobile-nav");
             $(this).toggleClass("is-active");
         });
     </script>
-    <script>
-        $(window).load(function () {
-            $('#slider').flexslider({
-                slideshow: true,
-                animation: "fade",
-                controlNav: false,
-                animationLoop: true,
-                directionNav: false,
-                video: false,
-                slideshowSpeed: 3000, //Integer: Set the speed of the slideshow cycling, in milliseconds
-                animationSpeed: 600,
-                /* reload video on navigation */
-                before: function () {
-                    $('video').each(function () {
-                        $(this).get(0).load();
-                    });
-                }
-            });
-        });
-    </script>
-
+   
     <script type='text/javascript'
         src='https://platform-api.sharethis.com/js/sharethis.js#property=5e834708c43e3f0019117e5c&product=inline-share-buttons'
         async='async'></script>
 
 
-    <script src="{% static 'js/lazysizes.min.js' %}"></script>
+   
     {% block js %}
 
 
     {% endblock %}
-    <script language="JavaScript" type="text/javascript">
-        var bodyLoad = parent.document.getElementsByTagName("body2")[0];
-        bodyLoad.setAttribute("oncontextmenu", "return false;");
-        bodyLoad.setAttribute("ondragstart", "return false;");
-        bodyLoad.setAttribute("onselectstart", "return false;");
-    </script>
-
- <!-- ***************************    Chargement js  ************************************ -->
- 
- <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.6.3/jquery.flexslider-min.js"></script>
-
-
+  
 </body>
 
 </html>

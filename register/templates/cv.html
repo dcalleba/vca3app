@@ -1,11 +1,45 @@
-{% extends "bas.html" %}
+{% extends "basnew.html" %}
 {% load static %}
 {% block titre %}
 {{title}}
 {% endblock %}
+{% block css %}
+<style>
+     .affiche_container {
+        display: -webkit-flex;
+        display: flex;
+        flex-direction: column;
+        z-index: -2;
+        margin: 0 auto;
+        align-items: center;
+        max-width: 98%;
+    }
+
+    .affiche_box {}
+
+    .affiche_img {
+        height: 100%;
+        max-height: calc(100vh - 60px);
+        object-fit: contain;
+    }
+</style>
+{% endblock %}
 {% block slide %}
 
-{% include "cv__slide.html" %}
+{% endblock %}
+
+{% block affiche %}
+<div class="affiche_container">
+    <div admin class="img_dim">
+        {% if cook == "ok" %}
+        <p> <a class="myButton" href="/upphocont">Upload new photo for Contact</a></p>
+        {% endif %}
+    </div>
+    <div class="affiche_box">
+       
+        <img class="affiche_img lazyload blur" src="{% static  'cv/hr/cvimg.jpg' %}" alt="cv_photo" width="1800px" height="1272px" style="max-width: 100%;"/>
+    </div>
+</div>
 {% endblock %}
 {% block grid %}
 {% endblock %}

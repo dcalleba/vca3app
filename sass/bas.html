@@ -64,11 +64,7 @@
     <meta name="google-site-verification" content="bUmRgwDIWvAsaztlKM_EbiYs6M3huQCf5BZGkH15o2g" />
 
     <!-- ***************************    Chargement js  ************************************ -->
-    <script src="{% static '/js/jquery.js' %}"></script>
-
-
-
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
    
 
     <!-- ***************************    Chargement css  ************************************ -->
@@ -92,13 +88,12 @@
     <link rel="apple-touch-icon" sizes="144x144" href="{% static 'icons/apple-touch-icon-144x144.png' %}" />
     <link rel="apple-touch-icon" sizes="152x152" href="{% static 'icons/apple-touch-icon-152x152.png' %}" />
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'icons/apple-touch-icon-180x180.png' %}" />
-    
-    <!-- <link rel="preload" href="{% static '/css/mix12.css' %}" as="style"> -->
-    <link rel="stylesheet" type="text/css" href="{% static '/css/mix12.css' %}">
+
+    <link rel="preload" href="{% static '/css/mix5.css' %}" as "style">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/mix5.css' %}">
     <style>
         html {
             background-color: #f2f7f3;
-            overflow-y:scroll;
         }
 
         .largeur {
@@ -151,7 +146,7 @@
     <div class="haut-calc-large">
         <nav class="navbar">
             <img class="navbar__logo lazyload blur-up" alt="project"
-                src="{% static 'images/vincent_logomd1.png' %}" width="700px" height="100px" alt='Company Logo'>
+                src="{% static 'images/vincent_logomd1.png' alt='Company Logo' %}">
 
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
@@ -180,10 +175,6 @@
     {% block slide %}
     {% include "slide.html"%}
     {% endblock %}
-    {% block affiche %}
-    {% endblock %}
-    {% block newslide %}
-    {% endblock %}
     {% block grand_titre %}
     {% endblock %}
     {% block fiche %}
@@ -193,6 +184,7 @@
     {% block projet_description %}
     {% endblock %}
     {% block foot %}
+
     {% include "footer.html"%}
     {% endblock %}
     {% block article %}

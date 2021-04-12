@@ -1,0 +1,60 @@
+{% extends "bas.html" %} {% load static %}
+
+<!--  -->
+{% block css %}
+<style>
+ 
+    .image_container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-items: center;
+        justify-content: center;
+        justify-self: center;
+        text-align: center;
+        z-index: -2;
+        /* height: calc(100% + 1px);
+        width: calc(100vh * 1.415);
+        margin: auto; */
+    }
+
+    .img_dim {
+        --main-width-image: calc((100vh - 60px) * 1.415 - 0px);
+        --main-height-image: calc(100vh - 60px)
+        display: block;
+        max-width: 98vw;
+        width: var(--main-width-image);
+     
+        
+        /* height: var(--main-height-image) */
+        background-color: white;
+    }
+
+    /* .lazyloaded {
+    opacity: 1;
+    transition: opacity 2.5s ease-in-out;
+    width: 1200px;
+    height: calc ( width / 1.42 )
+} */
+</style>
+{% endblock %}
+{% block slide %}
+
+<div class="image_container">
+    <div admin class="img_dim">
+        {% if cook == "ok" %}
+        <p> <a class="myButton" href="/upphocont">Upload new photo for Contact</a></p>
+        {% endif %}
+    </div>
+    <div pho>
+        <img class="img_dim lazyload blur" src="{% static  'contact/hr/contimg.jpg' %}" alt="photo_contact" />
+    </div>
+    <!-- <div pho>
+        <img class="img_dim lazyloaded" src="{% static  'contact/hr/contimg.jpg' %}"  alt="photo_contact" />
+    </div> -->
+</div>
+{% endblock %}
+{% block grid %}
+{% endblock %}
+{% block article %}
+{% endblock %}

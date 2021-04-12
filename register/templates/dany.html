@@ -74,8 +74,8 @@
     {% for imgt,imgh,img_alt in liste_thumb %}
     <div class="affiche_box fade">
         <picture>  
-        <source media="(max-width: 852px)" srcset="{% static imgt %}" width="1451" height="1050" loading="lazy">
-        <img loading="lazy" class="affiche_img" src="{% static imgh %}" alt="Slide 1" width="1451" height="1050" style=" max-width: 100%;" />
+        <source media="(max-width: 852px)" srcset="{% static imgt %}" width="1451px" height="1050px" loading="lazy">
+        <img class="affiche_img" src="{% static imgh %}" alt="Slide 1" width="1451px" height="1050px" style=" max-width: 100%;" />
         </picture>  
     </div>
     {% endfor %}

@@ -3,37 +3,51 @@
 <!--  -->
 {% block css %}
 <style>
-    .image_container {
+    .affiche_container {
+        display: -webkit-flex;
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-items: center;
-        justify-content: center;
-        justify-self: center;
-        text-align: center;
+        flex-direction: column;
         z-index: -2;
+        margin: 0 auto;
+        align-items: center;
+        max-width: 98%;
     }
 
-    .img_dim {
-        --main-width-image: calc((100vh - 60px) * 1.415 - 0px);
-        display: block;
-        max-width: 98vw;
-        width: var(--main-width-image);
-        background-color: white;
+    .affiche_box {}
+
+    .affiche_img {
+        height: 100%;
+        max-height: calc(100vh - 60px);
+        object-fit: contain;
     }
+
+    /* .lazyloaded {
+    opacity: 1;
+    transition: opacity 2.5s ease-in-out;
+    width: 1200px;
+    height: calc ( width / 1.42 )
+} */
 </style>
 {% endblock %}
 {% block slide %}
+{% endblock %}
 
-<div class="image_container">
+{% block affiche %}
+
+<div class="affiche_container">
     <div admin class="img_dim">
         {% if cook == "ok" %}
         <p> <a class="myButton" href="/upphocont">Upload new photo for Contact</a></p>
         {% endif %}
     </div>
-    <div pho>
-        <img class="img_dim lazyload blur" src="{% static  'contact/hr/contimg.jpg' %}" alt="photo_contact" />
+    <div class="affiche_box">
+
+        <img class="affiche_img lazyload blur" src="{% static  'contact/hr/contimg.jpg' %}" alt="photo_contact"
+            width="1451" height="1050px" style="max-width: 100%;" />
     </div>
+    <!-- <div pho>
+        <img class="img_dim lazyloaded" src="{% static  'contact/hr/contimg.jpg' %}"  alt="photo_contact" />
+    </div> -->
 </div>
 {% endblock %}
 {% block grid %}

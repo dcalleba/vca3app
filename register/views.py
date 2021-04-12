@@ -316,6 +316,49 @@ def index(request):
 
 
 
+def dany(request):
+    ip = _ip_visiteur(request)
+    cook = _lacook(request)
+    form = VisiteurForm()
+    envisite = Visiteur(page='index', ip=ip, test2=dh(request))
+    envisite.save()
+
+    dossier_projets = static + "/projects/"
+    liste_projets = os.listdir(dossier_projets)
+    liste_projets.sort(reverse=True)
+    projet_dir = []
+    ii = 0
+    exclu = ['101021_greenwave', '060416_jeongok', '060114_estonie', '050925_geneve', '050116_san_francisco', '041201_floatingislands', '040731_maurice',
+             '040730_mauritius', '031130_tubize', '031030_edf', '030930_dublin', '030930_busan', '011201_elasticity', '011030_saint_etienne', '010830_quai_branly', '010401_canal']
+
+    for projet in liste_projets:
+        if projet not in exclu:
+
+            list_images = os.listdir(dossier_projets+projet+'/hr/')
+            list_images.sort()
+            # 1° image
+            image = list_images[0]
+            first_slide = image
+            # ajoute la planche 000
+            phrase_thumb = 'projects/'+projet+'/thumb/'+image
+
+            phrase_hr = 'projects/'+projet+'/hr/'+image
+            img_alt = _imgalt(request, 'projects', projet,)
+            projet_dir.append([phrase_thumb, phrase_hr, img_alt])
+
+    args = {"meta_titre": 'VINCENT CALLEBAUT ARCHITECTURES PARIS'}
+
+    #args['form'] = form
+    args['liste_thumb'] = projet_dir
+    args['firstslide'] = first_slide,
+    tup = listlast(request)
+    args['tup'] = tup
+    args['form'] = form
+    args['meta_desc'] = "Awarded in the top 50 of the Green Planet Architects, Vincent Callebaut Architectures is referenced as the best eco-prospective and visionary architectural"
+    args['canonical'] = "https://vincent.callebaut.org/dany"
+    args['cook'] = cook
+    return render(request, 'dany.html', args)
+
 
 def cv(request, mode='user'):
     ip = _ip_visiteur(request)
@@ -469,6 +512,29 @@ def contact(request, mode='user'):
     args['cook'] = cook
     # args['tup']=tup
     return render(request, 'contact.html', args)
+
+def contact2(request, mode='user'):
+    ip = _ip_visiteur(request)
+    cook = _lacook(request)
+    form = VisiteurForm()
+    envisite = Visiteur(page='Dossier Contact', ip=ip, test2=dh(request))
+    envisite.save()
+    titrecont1 = open(static + 'contact/txt/us/titre_us.txt')
+    titrecont = titrecont1.readlines()
+    tup = listlast(request)
+    title = "CONTACT"
+    args = {"menu": "Contact"}
+    args['titrecont'] = titrecont
+    args['range'] = range(10)
+    args['mode'] = mode
+    args['title'] = 'title'
+    args['form'] = form
+    args['meta_titre'] = title
+    args['meta_desc'] = 'Contact Vincent Callebaut Architectures Paris'
+    args['tup'] = tup
+    args['cook'] = cook
+    # args['tup']=tup
+    return render(request, 'contact 2.html', args)
 
 
 def myadmin(request):
@@ -916,6 +982,8 @@ def publications(request, categorie='publications', mode=None):
         proj_titre.append(img_alt)
         proj_titre.append(meta_desc)
         item_list.append(proj_titre)
+        # if cpt > 80:
+        #     break
     if categorie == 'projects':
         #meta_desc = "All PUBLICATIONS Vincent Callebaut Architectures Paris"
         menu = 'Projects'
@@ -1233,6 +1301,7 @@ def zoom(request, categorie="projects", date_projet="150527_woodenorchids", thum
     args['date_projet'] = date_projet
     args['thumb'] = thumb
     args['form'] = form
+    args['meta_desc'] = date_projet+thumb
 
     return render(request, 'zoom.html', args)
 

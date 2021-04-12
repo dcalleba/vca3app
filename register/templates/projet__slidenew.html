@@ -1,0 +1,130 @@
+
+{% block css %}
+<style>
+    .affiche__dot {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+
+    .affiche__dot--active {
+        background-color: #717171;
+    }
+
+    .affiche_container {
+        display: -webkit-flex;
+        display: flex;
+        flex-direction: column;
+        z-index: -2;
+        margin: 0 auto;
+        align-items: center;
+        max-width: 98%;
+    }
+
+    .affiche_box {
+        display: none;
+    }
+
+    .affiche_img {
+        height: 100%;
+        max-height: calc(100vh - 60px);
+        object-fit: contain;
+    }
+
+    .fade {
+        -webkit-animation-name: fade;
+        -webkit-animation-duration: 1.5s;
+        animation-name: fade;
+        animation-duration: 1.5s;
+    }
+
+    @-webkit-keyframes fade {
+        from {
+            opacity: .4
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    @keyframes fade {
+        from {
+            opacity: .4
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+</style>
+{% endblock %}
+
+<!-- *****************************************  slide projet **************************************** -->
+<div class="affiche_container">
+
+        {% for image,img_alt in item_list %}
+        <div class="affiche_box fade">
+            <picture>  
+            <source media="(max-width: 852px)" srcset="{{image}}" width="1451px" height="1050px" loading="lazy">
+            <img class="affiche_img" src="{{image}}" alt="{{img_alt}}" width="1451px" height="1050px" style=" max-width: 100%;" />
+            </picture>  
+        </div>
+        {% endfor %}
+    
+        <div style="text-align:center;display:none">
+                {% for image,img_alt in item_list %}
+            <span class="affiche__dot"></span>
+            {% endfor %}
+        </div>
+    </div>
+    
+<!-- 
+<div class="slide__cadre">
+        <div id="slider" class="slide">
+
+                <ul class="slides">
+                        {% for image,img_alt in item_list %}
+                        <li>
+                                <picture>
+                                        <source media="(max-width: 852px)" srcset={{image}} loading="lazy">
+                                        <img class="img lazyload blur-up slide__dim" data-src={{image}} alt="{{img_alt}}" loading="lazy">
+                                </picture>
+                        </li>
+                        {% endfor %}
+                </ul>
+        </div>
+</div>
+ -->
+
+
+
+<script>
+        var slideIndex = 0;
+        showSlides();
+    
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("affiche_box");
+            // console.log(slides.length);
+            var dots = document.getElementsByClassName("affiche__dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" affiche__dot--active", ""); //espace avant le dot--active
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " affiche__dot--active";
+            setTimeout(showSlides, 4000); // Change image every 2 seconds
+        }
+    </script>
+<!-- *************************************************************************************************** -->

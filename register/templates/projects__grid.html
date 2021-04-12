@@ -2,32 +2,24 @@
 <div class="grid__container ">
   <div class="grid__magic largeur">
     {% for date_projet,projet,vignette,titre_lien,vignette_desc,titre,lien,titre_href,untitreesp,cook,img_alt in item_list %}
-   
     <div class="grid__carte">
-      
       <picture>
-        <figure class="grid__figcaption">    
+        <figure class="grid__figcaption">
           {% if cook == "ok" %}
           "{{categorie}}/{{date_projet}}"
           <a class="myButton" href="/eff_proj/{{categorie}}/{{date_projet}}">Suppression du dossier</a>
           {% endif %}
           <a href="/object/{{date_projet}}/{{projet}}/{{categorie}}" title="{{vignette_titre}}">
-
-            <img class="lazyload blur-up grid_img__box grid__img grid__img--hover "
-              data-src="{% static '/'%}{{categorie}}/{{date_projet}}/thumb/{{vignette}}" loading="lazy"
-              alt="{{img_alt}}" />
-
-            <!-- <img class="grid_img__box grid__img grid__img--hover "
-              data-src="{% static '/'%}{{categorie}}/{{date_projet}}/thumb/{{vignette}}" 
-              alt="{{img_alt}}" /> -->
-
+            <img loading="lazy" class="blur-up grid_img__box grid__img grid__img--hover "
+              src="{% static '/'%}{{categorie}}/{{date_projet}}/thumb/{{vignette}}" width="720" height="509"
+               alt="{{img_alt}}" />
           </a>
           <figcaption class="grid__figcaption">
             {% if cook == "ok" %}
             <a class="myButton" href="/trumbo/{{categorie}}_{{date_projet}}_txt_us_titre_us">Edition</a>
             {% endif %}
             <div class="grid__desc vignette_titre">
-             {% include titre_lien %}
+              {% include titre_lien %}
             </div>
           </figcaption>
         </figure>

@@ -5,9 +5,14 @@
         },
         {
             "path": ".."
+        },
+        {
+            "path": "../../../labo/lazy"
         }
     ],
     "settings": {
-        "liveServer.settings.multiRootWorkspaceName": "labo"
+        "liveServer.settings.multiRootWorkspaceName": "lazy",
+        "liveServer.settings.port": 5501,
+        "python.pythonPath": "/usr/local/bin/python"
     }
 }

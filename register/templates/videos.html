@@ -1,12 +1,20 @@
-{% extends "bas.html" %} 
-
+{% extends "basnew.html" %}
+{% block css %}
+<style>
+    @media only screen and (max-width: 748px) {
+  .haut-calc-large {
+   
+    right: auto; 
+  }
+</style>
+{% endblock %}
 {% block titre %}
 {{title}}
 {% endblock %}
 {% block slide %}
 {% endblock %}
 {% block grid %}
-{% include "videos__grid.html"%}
+{% include "videos__grid 2.html"%}
 {% endblock %}
 {% block article %}
 {% endblock %}
