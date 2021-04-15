@@ -33,33 +33,54 @@
         height: 100%;
         max-height: calc(100vh - 60px);
         object-fit: contain;
-    }
+        /* background-color:black;
+        overlay:hidden;
+    } */
+}
 
     .fade {
         -webkit-animation-name: fade;
-        -webkit-animation-duration: 1.5s;
+        -webkit-animation-duration: 2.5s;
         animation-name: fade;
-        animation-duration: 1.5s;
+        animation-duration: 2.5s;
+        /* background-color:black;
+        overlay:hidden; */
+
+        /* transition: opacity 3s ease-in-out; */
     }
 
     @-webkit-keyframes fade {
         from {
-            opacity: .4
+            opacity: .5;
+           
         }
 
         to {
-            opacity: 1
+            opacity: 1;
+           
         }
     }
 
     @keyframes fade {
-        from {
-            opacity: .4
+        0% {
+           
+            opacity: .5
         }
+       
 
-        to {
+
+        100% {
+            
             opacity: 1
         }
+        /* 0%, 100%
+  {
+    opacity:1;
+  }
+  100%, 0%
+  {
+    opacity:0;
+  } */
     }
 </style>
 {% endblock %}

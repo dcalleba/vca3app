@@ -48,6 +48,8 @@ import re
 
 import operator
 
+from django.views.decorators.cache import cache_page
+
 static = '/home/dcallebaut/apps/vcastatic/'
 canon = 'https://vincent.callebaut.org/'
 global modif
@@ -270,7 +272,7 @@ def sauve_visiteur(request):
 def dh(request):
     return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-
+@cache_page(60 * 30 * 24)
 def index(request):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
@@ -285,10 +287,13 @@ def index(request):
     ii = 0
     exclu = ['101021_greenwave', '060416_jeongok', '060114_estonie', '050925_geneve', '050116_san_francisco', '041201_floatingislands', '040731_maurice',
              '040730_mauritius', '031130_tubize', '031030_edf', '030930_dublin', '030930_busan', '011201_elasticity', '011030_saint_etienne', '010830_quai_branly', '010401_canal']
-
+    cpt = 0
     for projet in liste_projets:
+       
         if projet not in exclu:
-
+            cpt = cpt +1
+            if cpt >= 24 :
+                break
             list_images = os.listdir(dossier_projets+projet+'/hr/')
             list_images.sort()
             # 1° image
@@ -296,7 +301,6 @@ def index(request):
             first_slide = image
             # ajoute la planche 000
             phrase_thumb = 'projects/'+projet+'/thumb/'+image
-
             phrase_hr = 'projects/'+projet+'/hr/'+image
             img_alt = _imgalt(request, 'projects', projet,)
             projet_dir.append([phrase_thumb, phrase_hr, img_alt])
@@ -316,50 +320,9 @@ def index(request):
 
 
 
-def dany(request):
-    ip = _ip_visiteur(request)
-    cook = _lacook(request)
-    form = VisiteurForm()
-    envisite = Visiteur(page='index', ip=ip, test2=dh(request))
-    envisite.save()
-
-    dossier_projets = static + "/projects/"
-    liste_projets = os.listdir(dossier_projets)
-    liste_projets.sort(reverse=True)
-    projet_dir = []
-    ii = 0
-    exclu = ['101021_greenwave', '060416_jeongok', '060114_estonie', '050925_geneve', '050116_san_francisco', '041201_floatingislands', '040731_maurice',
-             '040730_mauritius', '031130_tubize', '031030_edf', '030930_dublin', '030930_busan', '011201_elasticity', '011030_saint_etienne', '010830_quai_branly', '010401_canal']
-
-    for projet in liste_projets:
-        if projet not in exclu:
-
-            list_images = os.listdir(dossier_projets+projet+'/hr/')
-            list_images.sort()
-            # 1° image
-            image = list_images[0]
-            first_slide = image
-            # ajoute la planche 000
-            phrase_thumb = 'projects/'+projet+'/thumb/'+image
-
-            phrase_hr = 'projects/'+projet+'/hr/'+image
-            img_alt = _imgalt(request, 'projects', projet,)
-            projet_dir.append([phrase_thumb, phrase_hr, img_alt])
-
-    args = {"meta_titre": 'VINCENT CALLEBAUT ARCHITECTURES PARIS'}
-
-    #args['form'] = form
-    args['liste_thumb'] = projet_dir
-    args['firstslide'] = first_slide,
-    tup = listlast(request)
-    args['tup'] = tup
-    args['form'] = form
-    args['meta_desc'] = "Awarded in the top 50 of the Green Planet Architects, Vincent Callebaut Architectures is referenced as the best eco-prospective and visionary architectural"
-    args['canonical'] = "https://vincent.callebaut.org/dany"
-    args['cook'] = cook
-    return render(request, 'dany.html', args)
 
 
+@cache_page(60 * 30 * 24)
 def cv(request, mode='user'):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
@@ -489,7 +452,7 @@ def category(request, categorie='projects', mode=None):
     # TODO: test 'category.html'
     return render(request, 'videos.html', args)
 
-
+@cache_page(60 * 30 * 24)
 def contact(request, mode='user'):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
@@ -512,6 +475,10 @@ def contact(request, mode='user'):
     args['cook'] = cook
     # args['tup']=tup
     return render(request, 'contact.html', args)
+
+
+def bastest(request, mode='user'):
+    return render(request, 'bastest.html')
 
 def contact2(request, mode='user'):
     ip = _ip_visiteur(request)
@@ -567,7 +534,7 @@ def myhelp(request):
     args['tup'] = tup
     return render(request, 'myhelp.html', args)
 
-
+@cache_page(60 * 30 * 24)
 def projet(request, date_projet='x', projet='aequorea', categorie="projects", mode=''):
 
     ip = _ip_visiteur(request)
@@ -784,7 +751,7 @@ def projet(request, date_projet='x', projet='aequorea', categorie="projects", mo
     #args['canonical']= urlcan
     return render(request, 'projet.html', args)
 
-
+@cache_page(60 * 30 * 24)
 def projects(request, categorie='projects', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
@@ -899,7 +866,7 @@ def projects(request, categorie='projects', mode=None):
     return render(request, 'projects.html', args)
 
 
-def publications(request, categorie='publications', mode=None):
+def publications_old(request, categorie='publications', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
@@ -1032,7 +999,7 @@ def publications(request, categorie='publications', mode=None):
     return render(request, 'publications.html', args)
 
 
-def exhibitions(request, categorie='exhibitions', mode=None):
+def exhibitionsold(request, categorie='exhibitions', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
@@ -1639,8 +1606,7 @@ def creation(request, cat="defaut", date_projet="defaut", proj="def"):
                         racine+dossier+'/thumb/'+leprojet+"_"+f, 'JPEG', quality=30)
                     imgfull = image.resize(
                         (1800, new_height_full), Image.ANTIALIAS)
-                    imgfull.save(racine+dossier+'/hr/'+leprojet +
-                                 "_"+f, 'JPEG', quality=30)
+                    imgfull.save(racine+dossier+'/hr/'+leprojet +"_"+f, 'JPEG', quality=30)
                 except:
                     return HttpResponse("<br><br><br><br><br><br><br><br><br><br><br>Probleme avec le fichier :" + f + cat)
         # traitement des videos
@@ -1831,12 +1797,14 @@ def metatest(request):
     # return HttpResponse(myfile)
 
 
-def publicationstest(request, categorie='publications', mode=None):
-    litmax = 150
+@cache_page(60 * 30 * 24)
+def publications(request, categorie='publications', start=0, mode=None):
+    start = int(start)
+    pas = 24
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
-    envisite = Visiteur(page='pulications', ip=ip, test2=dh(request))
+    envisite = Visiteur(page='Dossier Publications', ip=ip, test2=dh(request))
     envisite.save()
 
     modif = request.COOKIES.get('modif')
@@ -1848,104 +1816,91 @@ def publicationstest(request, categorie='publications', mode=None):
     item_list = []
     cpt = 0
     for date_projet in liste_projets:
-        cpt = cpt+1
-        if cpt >= litmax:
-            break
-        img_alt = _imgalttxt(request, categorie, date_projet)
-        dossier = categorie+"/"+date_projet+"/"
-        desc_txt = htmltxt(request, dossier)
-        meta_desc = _metadesc(request, categorie, date_projet)
-        desc_txt = meta_desc
-        desc = ''
+        cpt = cpt+1 
+        if cpt > start:
+            img_alt = _imgalt(request, categorie, date_projet)
+            dossier = categorie+"/"+date_projet+"/"
+            #desc_txt  = htmltxt(request,dossier)
+            meta_desc = _metadesc(request, categorie, date_projet)
+            desc_txt = meta_desc
+            desc = ''
 
-        # on recherche les images dns dossier hr
-        cpt = cpt+1
+            # on recherche les images dns dossier hr
+       
 
-        liste_images = os.listdir(dossier_projets+"/"+date_projet+'/hr/')
-        liste_images.sort(reverse=False)
-        try:
-            vignette = liste_images[0]
-            title_href = vignette[:-4]
-        except:
-            vignette = 'pbvig'
-            title_href = ""
-        projet = date_projet[7:len(date_projet)]  # on enleve la date du debut
-        titre = ['pas de titre']
-        untitre = ""
-        try:
-            #tit = os.listdir(racine+date_projet+"/txt/us/")
-            # if 'tit' in tit[0]:
-            #titrer = codecs.open(racine+date_projet+"/txt/us/"+tit[0], "r")
-            titrer = codecs.open(racine+date_projet +
-                                 "/txt/us/titre_us.txt", "r")
-            untitre = titrer.readline()
-            titre = titrer.readlines()
-        except:
+            liste_images = os.listdir(dossier_projets+"/"+date_projet+'/hr/')
+            liste_images.sort(reverse=False)
+            try:
+                vignette = liste_images[0]
+                title_href = vignette[:-4]
+            except:
+                vignette = 'pbvig'
+                title_href = ""
+            projet = date_projet[7:len(date_projet)]  # on enleve la date du debut
             titre = ['pas de titre']
             untitre = ""
-            pass
-        try:
-            # titre sous vignette
-            titre_lien = categorie+"/"+date_projet+"/txt/us/titre_us.html"
-        except:
-            titre_lien = "erreur2.html"
+            try:
+                #tit = os.listdir(racine+date_projet+"/txt/us/")
+                # if 'tit' in tit[0]:
+                #titrer = codecs.open(racine+date_projet+"/txt/us/"+tit[0], "r")
+                titrer = codecs.open(racine+date_projet +
+                                    "/txt/us/titre_us.txt", "r")
+                untitre = titrer.readline()
+                titre = titrer.readlines()
+            except:
+                titre = ['pas de titre']
+                untitre = ""
+                pass
+            try:
+                # titre sous vignette
+                titre_lien = categorie+"/"+date_projet+"/txt/us/titre_us.html"
+            except:
+                titre_lien = "erreur2.html"
 
-        try:
-            fic_lien = codecs.open(racine+date_projet+"/txt/us/lien.txt", "r")
-            lien = fic_lien.readline()
-        except:
-            lien = date_projet
+            try:
+                fic_lien = codecs.open(racine+date_projet+"/txt/us/lien.txt", "r")
+                lien = fic_lien.readline()
+            except:
+                lien = date_projet
 
-        untitreesp = "VCA"
-        try:
-            untitreesp = untitre.replace(',', ' ')
-            untitreesp = untitreesp.replace(' ', '_')
-        except:
-            pass
+            untitreesp = "VCA"
+            try:
+                untitreesp = untitre.replace(',', ' ')
+                untitreesp = untitreesp.replace(' ', '_')
+            except:
+                pass
 
-        vignette_desc = ""
+            vignette_desc = ""
 
-        proj_titre = [date_projet]
-        proj_titre.append(projet)
-        proj_titre.append(vignette)
-        proj_titre.append(titre_lien)
-        proj_titre.append(vignette_desc)
-        proj_titre.append(titre)
-        proj_titre.append(lien)
-        proj_titre.append(title_href)
-        proj_titre.append(untitreesp)
-        proj_titre.append(cook)
-        proj_titre.append(img_alt)
-        proj_titre.append(meta_desc)
-        item_list.append(proj_titre)
-    if categorie == 'projects':
-        #meta_desc = "All PUBLICATIONS Vincent Callebaut Architectures Paris"
-        menu = 'Projects'
-        description = "Vincent Callebaut Architectures, Sustainable Architecture, Biomimicry Design, Paris Smart City 2050, Lilypad, Dragonfly, Tao Zhu Yin Yuan, Agora Garden"
-        canonical = canon+'category/projects'
-    if categorie == 'videos':
-        menu = 'Videos'
-        title = "All Vidéos"
-        #meta_desc = "All Videos Vincent Callebaut Architectures Paris"
-        description = "Vincent Callebaut Architectures, Talks, TEDx, TV Interviews, TF1, France 2, Arte, M6, LCP, City of Future, Sustainability, Energy Plus, Circular Economy"
-        canonical = canon+"category/videos"
-    if categorie == 'exhibitions':
-        #meta_desc = "All exhibitions Vincent Callebaut Architectures Paris"
-        menu = 'Exhibitions'
-        description = "Vincent Callebaut Architectures, Exhibitions, Conferences, Lectures, International Architecture, Innovation Awards, Architecture Biennial, World Exhibition"
-        canonical = canon+"category/exhibitions"
-    if categorie == 'publications':
-        #meta_desc = "All publications Vincent Callebaut Architectures Paris,-"
-        menu = 'Publications'
-        description = "Vincent Callebaut Architectures, Press Releases, Monographies, Books, Paris 2050, Fertile Cities, Archibiotic, Interviews, CNN, BBC, Time, Green Building"
-        canonical = canon+"category/publications"
+            proj_titre = [date_projet]
+            proj_titre.append(projet)
+            proj_titre.append(vignette)
+            proj_titre.append(titre_lien)
+            proj_titre.append(vignette_desc)
+            proj_titre.append(titre)
+            proj_titre.append(lien)
+            proj_titre.append(title_href)
+            proj_titre.append(untitreesp)
+            proj_titre.append(cook)
+            proj_titre.append(img_alt)
+            proj_titre.append(meta_desc)
+            item_list.append(proj_titre)
+            if cpt > (start+pas-1):
+                break
+    
+    next = (start+pas)
+    previous = (start-pas)
+    #meta_desc = "All publications Vincent Callebaut Architectures Paris,-"
+    menu = 'Publications'
+    description = "Vincent Callebaut Architectures, Press Releases, Monographies, Books, Paris 2050, Fertile Cities, Archibiotic, Interviews, CNN, BBC, Time, Green Building"
+    canonical = canon+"category/publications"
 
     title = categorie.capitalize()   # aussi utilisé our video
     if cpt < 5:
         vigdef = 'min'
     else:
         vigdef = 'full'
-    args = {"untitreesp": 'test'}
+    args = {"untitreesp": ''}
     args['description'] = description
     args['item_list'] = item_list
     args['categorie'] = categorie
@@ -1962,4 +1917,112 @@ def publicationstest(request, categorie='publications', mode=None):
     args['tup'] = tup
     args['cook'] = cook
     args['vigdef'] = vigdef
+    args['next'] = next
+    args['previous'] = previous
+
     return render(request, 'publications.html', args)
+
+
+@cache_page(60 * 30 * 24)
+def exhibitions(request, categorie='exhibitions', start=0, mode=None):
+    start = int(start)
+    pas = 24
+    ip = _ip_visiteur(request)
+    cook = _lacook(request)
+    form = VisiteurForm()
+    envisite = Visiteur(page='Dossier Exhibitions', ip=ip, test2=dh(request))
+    envisite.save()
+
+    racine = static + categorie+"/"
+    dossier_projets = static + categorie + "/"
+    liste_projets = os.listdir(dossier_projets)
+    liste_projets.sort(reverse=True)
+    item_list = []
+    cpt = 0
+    for date_projet in liste_projets:
+        cpt = cpt+1 
+        if cpt > start:
+            img_alt = _imgalt(request, categorie, date_projet)
+            dossier = categorie+"/"+date_projet+"/"
+            desc_txt = htmltxt(request, dossier)
+            meta_desc = _metadesc(request, categorie, date_projet)
+            desc = ''
+
+            # on recherche les images dns dossier hr
+            #cpt = cpt+1
+
+            liste_images = os.listdir(dossier_projets+"/"+date_projet+'/hr/')
+            liste_images.sort(reverse=False)
+            try:
+                vignette = liste_images[0]
+                title_href = vignette[:-4]
+            except:
+                vignette = 'pbvig'
+                title_href = ""
+            projet = date_projet[7:len(date_projet)]  # on enleve la date du debut
+            titre = ['pas de titre']
+            untitre = ""
+            try:
+                # titre sous vignette
+                titre_lien = categorie+"/"+date_projet+"/txt/us/titre_us.html"
+            except:
+                titre_lien = "erreur2.html"
+
+            try:
+                fic_lien = codecs.open(racine+date_projet+"/txt/us/lien.txt", "r")
+                lien = fic_lien.readline()
+            except:
+                lien = date_projet
+
+            untitreesp = "VCA"
+            try:
+                untitreesp = untitre.replace(',', ' ')
+                untitreesp = untitreesp.replace(' ', '_')
+            except:
+                pass
+
+            vignette_desc = ''
+
+            proj_titre = [date_projet]
+            proj_titre.append(projet)
+            proj_titre.append(vignette)
+            proj_titre.append(titre_lien)
+            proj_titre.append(vignette_desc)
+            proj_titre.append(titre)
+            proj_titre.append(lien)
+            proj_titre.append(title_href)
+            proj_titre.append(untitreesp)
+            proj_titre.append(cook)
+            proj_titre.append(img_alt)
+            proj_titre.append(meta_desc)
+            item_list.append(proj_titre)
+            if cpt > (start+pas-1):
+                break
+    next = (start+pas)
+    previous = (start-pas)
+    if categorie == 'exhibitions':
+        meta_desc = "All exhibitions Vincent Callebaut Architectures Paris"
+        menu = 'Exhibitions'
+        description = "Vincent Callebaut Architectures, Exhibitions, Conferences, Lectures, International Architecture, Innovation Awards, Architecture Biennial, World Exhibition"
+        canonical = canon+"category/exhibitions"
+
+    args = {"untitreesp": ''}
+    args['description'] = description
+    args['item_list'] = item_list
+    args['categorie'] = categorie
+    args['mode'] = mode
+    args['form'] = form
+    #args['title']= title
+    args['menu'] = menu
+    args['meta_titre'] = "EXHIBITIONS"
+    args['meta_desc'] = meta_desc
+    #args['canonical']= canonical
+    args['vignette'] = "vignette"
+    tup = listlast(request)
+    args['tup'] = tup
+    args['cook'] = cook
+    args['next'] = next
+    args['previous'] = previous
+
+    return render(request, 'exhibitions.html', args)
+

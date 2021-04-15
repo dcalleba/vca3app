@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 {% load static %}
 <html lang="en-US" prefix="og: http://ogp.me/ns#">
@@ -7,6 +8,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-4971504-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
+
         function gtag() {
             dataLayer.push(arguments);
         }
@@ -14,7 +16,7 @@
         gtag('config', 'UA-4971504-1');
     </script>
 
-    <!-- <script src="{% static 'js/lazysizes.min.js' %}"></script> -->
+<!-- <script src="{% static 'js/lazysizes.min.js' %}"></script> -->
     {% block meta %}
     <title>{{meta_titre}}</title>
     <meta name="title" content="{{meta_titre}}" />
@@ -63,9 +65,14 @@
     <meta name="google-site-verification" content="bUmRgwDIWvAsaztlKM_EbiYs6M3huQCf5BZGkH15o2g" />
 
     <!-- ***************************    Chargement js  ************************************ -->
+  
 
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js" 
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
 
-
+   
 
     <!-- ***************************    Chargement css  ************************************ -->
 
@@ -88,14 +95,14 @@
     <link rel="apple-touch-icon" sizes="144x144" href="{% static 'icons/apple-touch-icon-144x144.png' %}" />
     <link rel="apple-touch-icon" sizes="152x152" href="{% static 'icons/apple-touch-icon-152x152.png' %}" />
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'icons/apple-touch-icon-180x180.png' %}" />
-
+    
     <!-- <link rel="preload" href="{% static '/css/mix12.css' %}" as="style"> -->
     <link rel="stylesheet" type="text/css" href="{% static '/css/mix12.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static '/css/grid__css.css' %}">
     <style>
         html {
             background-color: #f2f7f3;
-            overflow-y: scroll;
+            overflow-y:scroll;
         }
 
         .largeur {
@@ -146,8 +153,8 @@
 
     <div class="haut-calc-large">
         <nav class="navbar">
-            <img class="navbar__logo blur-up" alt="project" src="{% static 'images/vincent_logomd1.png' %}"
-                width="700px" height="100px" alt='Company Logo'>
+            <img class="navbar__logo blur-up" alt="project"
+                src="{% static 'images/vincent_logomd1.png' %}" width="700px" height="100px" alt='Company Logo'>
 
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
@@ -195,21 +202,25 @@
     {% include "article.html"%}
     {% endblock %}
 
+
     <script>
-        let hamburger = document.querySelector('.menu-toggle');
-        let menu = document.querySelector('.nav');
-        hamburger.addEventListener('click', function () {
-            hamburger.classList.toggle('is-active');
-            menu.classList.toggle('mobile-nav');
+        $('.menu-toggle').click(function () {
+            $(".nav").toggleClass("mobile-nav");
+            $(this).toggleClass("is-active");
         });
     </script>
-
+   
     <script type='text/javascript'
         src='https://platform-api.sharethis.com/js/sharethis.js#property=5e834708c43e3f0019117e5c&product=inline-share-buttons'
-        async='async'>
-    </script>
+        async='async'></script>
 
+
+   
     {% block js %}
+
+
     {% endblock %}
+  
 </body>
+
 </html>

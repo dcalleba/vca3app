@@ -1,15 +1,20 @@
-{% extends "basnew.html" %} 
+{% extends "basnew.html" %}
+{% load static %}
 {% block titre %}
 {{title}}
+{% endblock %}
+{% block css %}
 {% endblock %}
 {% block slide %}
 {% endblock %}
 {% block grid %}
 {% include "all__grid.html"%}
+<div class="grid__next">
+    {% if previous >= 0 %}
+    <a href="/exhibitions/{{previous}}" class="grid__button">Previous Page</a>
+    {% endif %}
+    <a href="/exhibitions/{{next}}" class="grid__button">Next Page</a>
+</div>
 {% endblock %}
 {% block article %}
 {% endblock %}
-
-<!-- {% block foot %}
-
-{% endblock %} -->
