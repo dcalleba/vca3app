@@ -275,7 +275,7 @@ def sauve_visiteur(request):
 def dh(request):
     return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-@cache_page(60 * 30 * 24)
+#@cache_page(60 * 30 * 24)
 def index(request):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
@@ -325,7 +325,7 @@ def index(request):
 
 
 
-@cache_page(60 * 30 * 24)
+#@cache_page(60 * 30 * 24)
 def cv(request, mode='user'):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
@@ -455,8 +455,9 @@ def category(request, categorie='projects', mode=None):
     # TODO: test 'category.html'
     return render(request, 'videos.html', args)
 
-@cache_page(60 * 30 * 24)
+
 def contact(request, mode='user'):
+    cache.clear()
     ip = _ip_visiteur(request)
     cook = _lacook(request)
     form = VisiteurForm()
@@ -537,7 +538,7 @@ def myhelp(request):
     args['tup'] = tup
     return render(request, 'myhelp.html', args)
 
-@cache_page(60 * 30 * 24)
+#@cache_page(60 * 30 * 24)
 def projet(request, date_projet='x', projet='aequorea', categorie="projects", mode=''):
 
     ip = _ip_visiteur(request)
@@ -754,7 +755,7 @@ def projet(request, date_projet='x', projet='aequorea', categorie="projects", mo
     #args['canonical']= urlcan
     return render(request, 'projet.html', args)
 
-@cache_page(1)
+#@cache_page(60 * 30 * 24)
 def projects(request, categorie='projects', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
@@ -1103,22 +1104,22 @@ def setAdminOn(request):
 
 
 def setAdminOff(request):
+    cache.clear()
     response = HttpResponseRedirect('/')
     response.set_cookie('modif', 'no', max_age=86400)
     return response
 
 
 def vcaadmin(request, var=''):
-    cache.clear()
+    #cache.clear()
     args = {"tup": listlast(request)}
     args['form'] = VisiteurForm()
     if var == "Roquette,2":     
         response = render(request, 'vcaadmin.html', args)
-        response.set_cookie('modif', 'ok', max_age=14400)
+        response.set_cookie('modif', 'ok', max_age=14400)# ne pas mettre en edition autoatique
         return response
     else:
         response = render(request, 'vcaadmin.html', args)
-           
         response.set_cookie('modif', 'no', max_age=86400)
         return response
 
@@ -1279,14 +1280,15 @@ def zoom(request, categorie="projects", date_projet="150527_woodenorchids", thum
 
 def eff_proj(request, dossier, projet):
     racine = '/home/dcallebaut/apps/vcastatic/'
-    try:
-        if os.path.exists(racine+dossier+"/"+projet):
-            shutil.rmtree(racine+dossier+"/"+projet)
-            return HttpResponse("<br><br><br><br><br><br><br><br><br><br><br>Dossier supprimé avec succés <a href='https://vincent.callebaut.org/projects'>Cliquer ici pour retour au projets</a>")
-        else:
-            return HttpResponse(u"<br><br><br><br><br><br><br><br><br><br><br>Erreur : le dossier " + racine+dossier+"/"+projet+u" n'a pas pu être supprimé ")
-    except:
-        return HttpResponse(u"<br><br><br><br><br><br><br><br><br><br><br>Erreur : le dossier " + racine+dossier+"/"+projet+u" n'a pas pu être supprimé ")
+    # try:
+    #     if os.path.exists(racine+dossier+"/"+projet):
+    #         shutil.rmtree(racine+dossier+"/"+projet)
+    #         return HttpResponse("<br><br><br><br><br><br><br><br><br><br><br>Dossier supprimé avec succés <a href='https://vincent.callebaut.org/projects'>Cliquer ici pour retour au projets</a>")
+    #     else:
+    #         return HttpResponse(u"<br><br><br><br><br><br><br><br><br><br><br>Erreur : le dossier " + racine+dossier+"/"+projet+u" n'a pas pu être supprimé ")
+    # except:
+    #     return HttpResponse(u"<br><br><br><br><br><br><br><br><br><br><br>Erreur : le dossier " + racine+dossier+"/"+projet+u" n'a pas pu être supprimé ")
+    return HttpResponse(u"<br><br><br><br><br><br><br><br><br><br><br>Erreur : le dossier " + racine+dossier+"/"+projet+u" n'a pas pu être supprimé ")
 
 
 def ren_proj(request, categorie, date_projet):
@@ -1801,7 +1803,7 @@ def metatest(request):
     # return HttpResponse(myfile)
 
 
-@cache_page(60 * 30 * 24)
+#@cache_page(60 * 30 * 24)
 def publications(request, categorie='publications', start=0, mode=None):
     start = int(start)
     pas = 24
@@ -1927,7 +1929,7 @@ def publications(request, categorie='publications', start=0, mode=None):
     return render(request, 'publications.html', args)
 
 
-@cache_page(60 * 30 * 24)
+#@cache_page(60 * 30 * 24)
 def exhibitions(request, categorie='exhibitions', start=0, mode=None):
     start = int(start)
     pas = 24
