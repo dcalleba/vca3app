@@ -48,6 +48,9 @@ import re
 
 import operator
 
+from django.core.cache import cache
+
+
 from django.views.decorators.cache import cache_page
 
 static = '/home/dcallebaut/apps/vcastatic/'
@@ -751,7 +754,7 @@ def projet(request, date_projet='x', projet='aequorea', categorie="projects", mo
     #args['canonical']= urlcan
     return render(request, 'projet.html', args)
 
-@cache_page(60 * 30 * 24)
+@cache_page(1)
 def projects(request, categorie='projects', mode=None):
     ip = _ip_visiteur(request)
     cook = _lacook(request)
@@ -1106,6 +1109,7 @@ def setAdminOff(request):
 
 
 def vcaadmin(request, var=''):
+    cache.clear()
     args = {"tup": listlast(request)}
     args['form'] = VisiteurForm()
     if var == "Roquette,2":     

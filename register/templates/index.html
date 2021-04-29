@@ -28,6 +28,9 @@
 
     .affiche_box {
         display: none;
+        /* background-color:black;
+        height: 100%;
+        width: 90%; */
     }
 
     .affiche_img {
@@ -41,6 +44,7 @@
         -webkit-animation-duration: 2.5s;
         animation-name: fade;
         animation-duration: 2.5s;
+        /* transition: 1500ms linear;  */
     }
 
     @-webkit-keyframes fade {
@@ -69,7 +73,7 @@
 
 
 {% block newslide %}
-<div class="affiche_container">
+<div class="affiche_container" >
 
     {% for imgt,imgh,img_alt in liste_thumb %}
     <div class="affiche_box fade">
