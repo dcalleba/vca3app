@@ -1,0 +1,95 @@
+{% block css %}
+<style>
+    :root {
+        --img-largeur: 1800;
+        --img-hauteur: 1272;
+        --ratio-img: calc(var(--img-largeur) / var(--img-hauteur));
+        --hauteur-menu: 60px;
+        --main-width: calc((100vh - var(--hauteur-menu)) * var(--ratio-img));
+    }
+
+    .fondu_container {
+        /* background-color: red; */
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        width: var(--main-width);
+        max-width: 100%;
+        justify-content: flex-start;
+        /*centrer vertical column */
+        align-items: center;
+        margin-bottom: 4px;
+        /* ccentre horizontal fondu_boite */
+    }
+
+    .fondu_boite {
+        /* background-color: rgb(190, 185, 252); */
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        width: var(--main-width);
+        max-width: 98%;
+        /* margin: 0 3px; */
+        height: calc((100vw / var(--ratio-img)));
+        max-height: calc(100vh - var(--hauteur-menu));
+        overflow: hidden;
+    }
+
+    @media screen and (min-width: 620px) {
+        .fondu_boite {
+            max-width: 100%;
+        }
+    }
+
+    .fondu_img {
+        display: flex;
+        position: absolute;
+        /* background-color: green; */
+        justify-content: center;
+        align-items: center;
+        width: var(--main-width);
+        max-width: 100%;
+        height: calc(100vw / var(--ratio-img));
+        max-height: calc(100vh - var(--hauteur-menu));
+        transition: opacity 2s ease-in;
+    }
+
+    .fondu_img+.fondu_img {
+        opacity: 0;
+    }
+</style>
+{% endblock %}
+
+<!-- *****************************************  slide projet **************************************** -->
+<div class="fondu_container">
+    <div class="fondu_boite">
+
+
+        {% for image,img_alt in item_list %}
+        <picture>
+            <source media="(max-width: 799px)" srcset="{{image}}">
+            <source media="(min-width: 800px)" srcset="{{image}}">
+            <img class="fondu_img" src="*" alt="{{img_alt}}" width="var(--img-largeur)" height="var(--img-hauteur)"
+                style="opacity:0;" />
+        </picture>
+        {% endfor %}
+
+
+    </div>
+</div>
+
+
+<script>
+    var current = 0,
+        slides = document.getElementsByClassName("fondu_img");
+    slides[0].style.opacity = 1;
+    setInterval(function () {
+        for (var i = 0; i < slides.length; i++) {
+            slides[i].style.opacity = 0;
+        }
+        current = (current != slides.length - 1) ? current + 1 : 0;
+        slides[current].style.opacity = 1;
+    }, 4000);
+</script>
+<!-- *************************************************************************************************** -->
